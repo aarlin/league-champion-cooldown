@@ -1,0 +1,25 @@
+welcome : Welcome to Morellonomicon, what champion ability do you need info on?
+
+help: |
+    I can help you find information on ability cooldowns for champions in League of Legends.
+    You can open Morellonomicon and ask a question like, 
+    get cooldown on Q ability for Tryndamere at rank 5 with 10% cdr.
+    I can also walk you through the process
+
+champion_dialog: Which champion would you like cooldown information on?
+
+champion_dialog_reprompt: Which champion?
+
+ability_dialog: Which ability on {{ champion }} would like you like information on?
+
+ability_dialog_reprompt: Which ability?
+
+rank_dialog: What rank is {{ ability }} ability?
+
+rank_dialog_reprompt: What rank?
+
+cdr_dialog: How much cooldown reduction does {{ champion }} have?
+
+cdr_dialog_reprompt: How much cooldown reduction?
+
+bye: Goodbye
