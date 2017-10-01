@@ -21,9 +21,22 @@ Make Alexa ask for a champion first or complex right off the bat
 
 
 
+502 Bad Gateway 
+Have u started `python morellonomicon.py` along with `ngrok http 5000`?
+
+Instructions:  
+
+`git clone`   
+`cd`  
+`conda create --name league python=3.6`  
+`source activate league`  
+`pip install cassiopeia` - use the pip w/ git command  
 `pip install flask`
 `pip install flask-ask`
+Fill out information for new Alexa skill ...
+`ngrok http 5000` in new terminal  
+`python morellonomicon`  
+Type out response under Service Simulator under Amazon Alexa skill
+Press 'Ask Morellonomicon'  
 
-502 Bad Gateway 
-Have u started `python morellonomicon.py` along with `ngrok http 5000`>
 
