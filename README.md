@@ -28,15 +28,33 @@ Instructions:
 
 `git clone`   
 `cd`  
-`conda create --name league python=3.6`  
-`source activate league`  
-`pip install cassiopeia` - use the pip w/ git command  
-`pip install flask`
-`pip install flask-ask`
-Fill out information for new Alexa skill ...
-`ngrok http 5000` in new terminal  
-`python morellonomicon`  
-Type out response under Service Simulator under Amazon Alexa skill
-Press 'Ask Morellonomicon'  
+`conda create --name league python=3.6`   
+`source activate league`    
+`pip install git+https://github.com/meraki-analytics/cassiopeia.git`
+`pip install flask`  
+`pip install flask-ask`  
+Fill out information for new Alexa skill ...  
+`ngrok http 5000` in new terminal    
+`python morellonomicon`    
+Type out response under Service Simulator under Amazon Alexa skill  
+Press 'Ask Morellonomicon'    
+
+Deploy using AWS Lambda
+
+`virtualenv --python=/usr/bin/python2.7 venv`
+`source venv/bin/activate`
+`pip install flask flask-ask zappa awscli`
+
+
+Zappa requires Python 2.7 virtual env...
+I used Anaconda Python 3.6 virtual env...
+Zappa doesn't support Anaconda
+
+Cassiopeia has Python 3.6 requirement
+How does Zappa grab dependencies?
+How can I call Riot API w/o Cassiopeia?
+
+How would this virtual env use my API key?
+
 
 
