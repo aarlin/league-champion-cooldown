@@ -1,10 +1,15 @@
-welcome : Welcome to Morellonomicon, what champion ability do you need info on?
-
+welcome : Welcome to Champion Cooldown
 help: |
     I can help you find information on ability cooldowns for champions in League of Legends.
     You can open Morellonomicon and ask a question like, 
     get cooldown on Q ability for Tryndamere at rank 5 with 10% cdr.
     I can also walk you through the process
+
+list_champions: |
+    Currently, I know cooldown information for these champions: {{ champions }}
+    Which champion would you like cooldown information for?
+
+list_champions_reprompt: Which champion would you like cooldown information for?
 
 champion_dialog: Which champion would you like cooldown information on?
 

@@ -56,5 +56,12 @@ How can I call Riot API w/o Cassiopeia?
 
 How would this virtual env use my API key?
 
+If Zappa keeps installing as different version from virtual env,
+`pip uninstall zappa` on own local OS
+
+Can't open from different folder? Have to use from same directory
+Can't use sqlite3 for caching requests ...?
+Can't grab from urllib fast enough. Time out for big json file. Have to use local json
+
 
 

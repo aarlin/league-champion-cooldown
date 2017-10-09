@@ -23,6 +23,9 @@
             ]
         },
         {
+            "intent": "SupportedChampionsIntent"
+        },
+        {
             "intent" : "AMAZON.HelpIntent"
         },
         {
