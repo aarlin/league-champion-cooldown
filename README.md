@@ -1,11 +1,4 @@
-# morellonomicon
-
-Alexa, open Morellonomicon
-Makes sense; opening up a book to look up stuff
-
-Alexa, open Vel'koz
-Vel'koz is known to want to know everything
-but it is slightly confusing when asking about Vel'koz himself
+## League of Legends Champion Cooldown - Alexa Skill
 
 How fast is it to query Alexa and get response if...
 querying the api and parsing data?
@@ -18,8 +11,6 @@ tell Morellonomicon what is Tryndamere R cooldown at 20%
 
 
 Make Alexa ask for a champion first or complex right off the bat
-
-
 
 502 Bad Gateway 
 Have u started `python morellonomicon.py` along with `ngrok http 5000`?
@@ -43,7 +34,7 @@ Deploy using AWS Lambda
 
 `virtualenv --python=/usr/bin/python2.7 venv`
 `source venv/bin/activate`
-`pip install flask flask-ask zappa awscli`
+`pip install flask flask-ask zappa awscli requests`
 
 
 Zappa requires Python 2.7 virtual env...
@@ -64,4 +55,38 @@ Can't use sqlite3 for caching requests ...?
 Can't grab from urllib fast enough. Time out for big json file. Have to use local json
 
 
+Would constantly need to be updated... when new patch hits
 
+Problem with Alexa listening to champion names
+
+`zappa tail --since 1m`
+Unable to import module 'handler': No module named builtins
+
+Use Python 3.6
+
+Alexa Skill linked to amazon.developer and alexa account. 
+
+Originally thought to use a pronunciation file to hold what I heard 
+from Alexa but it is too naive...
+
+Shouldnt use a csv file to hold all pronunciations...
+Rather we should use a phonetic matching algorithm...
+Looks like jellyfish or fuzzywuzzy
+
+`pip install pyphonetics`
+`pip install jellyfish`
+
+Constantly update csv file to add new pronunciation matches??
+Use in conjunction with library that finds closest match for champion name?
+
+Levenshtein distance
+Damerau-Levenshtein distance
+Jaro Distance
+???
+
+Normalization of data before hand?
+Running time? O(n) based on champion names... compare each champion name with alexa pronunciation
+Compare with jaro distance?
+
+
+Edit json file to replace MonkeyKing with WuKong... wukong or WuKong?

@@ -3,6 +3,7 @@ import os
 import sys
 import requests
 import json
+import csv
 from flask import Flask, render_template
 from flask_ask import Ask, statement, question, session
 
@@ -25,6 +26,12 @@ logging.getLogger('flask_ask').setLevel(logging.DEBUG)
 
 full_data = open('championFull.json')
 json_data = json.load(full_data)
+pronunciation = {}
+
+with open('pronunciation.csv') as csvfile:  
+    reader = csv.DictReader(csvfile)
+    for row in reader:
+        pronunciation[row['alexa_pronunciation']] = row['champion_name']
 
 @ask.launch
 def launched():
@@ -54,15 +61,25 @@ def supported_champions():
                                             'rank' : 'Rank',
                                             'cdr' : 'CooldownReduction'})
 def get_cooldown(champion, ability, rank, cdr):
-    uppercased_name = champion.title()
-    champion_data = json_data['data'][uppercased_name]
+    try:
+        champion_name = pronunciation[champion.title()]
+        champion_data = json_data['data'][champion_name]
+    except IndexError:
+        logging.debug('Bad pronunciation with: ' + champion)
 
     try:
         cooldown = get_spell_cooldown(champion_data, ability, rank, cdr)
-        return statement("{}'s rank {} {} ability at {}% cooldown reduction is {} seconds."
-        .format(champion, rank, ability, cdr, cooldown))
+        if cdr is NoneType:
+            return statement("{}'s rank {} {} ability at 0% cooldown reduction is {} seconds."
+            .format(champion, rank, ability, cdr))
+        else:
+            return statement("{}'s rank {} {} ability at {}% cooldown reduction is {} seconds."
+            .format(champion, rank, ability, cdr, cooldown))
     except IndexError:
         return statement("There seems to be a problem with your query")
+    except ValueError:
+        pass
+        # NO COOLDOWN
 
 def get_spell_cooldown(champion_data, ability, rank, cdr):
     keybinding = int()
@@ -76,7 +93,10 @@ def get_spell_cooldown(champion_data, ability, rank, cdr):
         keybinding = int(3)
 
     rank_index = int(rank) - 1
-    cooldown_reduction = float(cdr) / 100
+    try:
+        cooldown_reduction = float(cdr) / 100
+    except TypeError:
+        cooldown_reduction = 0
     spell = champion_data['spells'][keybinding] 
 
     spell_cooldown = spell['cooldown'][rank_index]
@@ -104,4 +124,4 @@ def cancel():
     return statement(bye_text)
 
 if __name__ == "__main__":
-    app.run(debug=True)
+    app.run()
