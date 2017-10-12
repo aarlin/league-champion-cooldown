@@ -73,20 +73,38 @@ Shouldnt use a csv file to hold all pronunciations...
 Rather we should use a phonetic matching algorithm...
 Looks like jellyfish or fuzzywuzzy
 
-`pip install pyphonetics`
 `pip install jellyfish`
 
 Constantly update csv file to add new pronunciation matches??
 Use in conjunction with library that finds closest match for champion name?
-
-Levenshtein distance
-Damerau-Levenshtein distance
-Jaro Distance
-???
 
 Normalization of data before hand?
 Running time? O(n) based on champion names... compare each champion name with alexa pronunciation
 Compare with jaro distance?
 
 
-Edit json file to replace MonkeyKing with WuKong... wukong or WuKong?
+Edit json file to replace MonkeyKing with WuKong
+
+jellyfish.match_rating_comparison(s1, s2)
+
+Check the csv file first, then do match_rating_comparison if csv doesn't hold pronunciation...
+Then if that doesn't work, get all the champions that hold true, put in list a state "Did you mean: a. Veigar b. Vi ..."
+Store the result into csv file with the champion name
+
+Function should handle NoneType, to ask them again what is for {{ variable }}
+
+Use Alexa learn something to get sample responses if Alexa didn't hear correctly
+
+Should I remove all spaces before the call or after?
+
+Theres an issue with csv file after deployment. If it keeps updating, how will I update zappa with a new champion json file without destroying the csv file (reverting it back to unupdated state?)
+
+Need to update LIST_OF_CHAMPIONS.txt and championFull.json
+
+zappa exclude
+
+Dropbox host csv file
+https://www.dropbox.com/developers-v1/core/start/python
+
+Use amazon s3 to hold json file??
+Use dynamodb or mongodb to hold key - value pairs of pronunciations

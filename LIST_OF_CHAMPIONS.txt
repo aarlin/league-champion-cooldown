@@ -69,7 +69,6 @@ Malzahar
 Maokai
 MasterYi
 MissFortune
-MonkeyKing
 Mordekaiser
 Morgana
 Nami
@@ -126,6 +125,7 @@ Viktor
 Vladimir
 Volibear
 Warwick
+WuKong
 Xayah
 Xerath
 XinZhao

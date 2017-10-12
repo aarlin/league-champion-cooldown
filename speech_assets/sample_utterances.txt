@@ -1,82 +1,160 @@
 
 OneshotCooldownIntent get cooldown for {Champion} {Ability} level {Rank} with {CooldownReduction} percent cooldown reduction
-OneshotCooldownIntent get cooldown for {Champion} {Ability} level {Rank} with {CooldownReduction} cdr
+OneshotCooldownIntent get cooldown for {Champion} {Ability} level {Rank} with {CooldownReduction} CDR
 OneshotCooldownIntent get cooldown for {Champion} {Ability} rank {Rank} with {CooldownReduction} percent cooldown reduction
-OneshotCooldownIntent get cooldown for {Champion} {Ability} rank {Rank} with {CooldownReduction} c d r
+OneshotCooldownIntent get cooldown for {Champion} {Ability} rank {Rank} with {CooldownReduction} CDR
 OneshotCooldownIntent get cooldown for {Champion} {Ability} {Rank} {CooldownReduction}
 OneshotCooldownIntent get cooldown for {Champion} {Ability} ability at rank {Rank} with {CooldownReduction} percent cooldown reduction
-OneshotCooldownIntent get cooldown for {Champion} {Ability} ability at rank {Rank} with {CooldownReduction} c d r
+OneshotCooldownIntent get cooldown for {Champion} {Ability} ability at rank {Rank} with {CooldownReduction} CDR
 OneshotCooldownIntent get cooldown for {Champion} {Ability} ability at level {Rank} with {CooldownReduction} percent cooldown reduction
-OneshotCooldownIntent get cooldown for {Champion} {Ability} ability at level {Rank} with {CooldownReduction} c d r
+OneshotCooldownIntent get cooldown for {Champion} {Ability} ability at level {Rank} with {CooldownReduction} CDR
 OneshotCooldownIntent get cooldown for {Champion} {Ability} spell at rank {Rank} with {CooldownReduction} percent cooldown reduction
-OneshotCooldownIntent get cooldown for {Champion} {Ability} spell at rank {Rank} with {CooldownReduction} c d r
+OneshotCooldownIntent get cooldown for {Champion} {Ability} spell at rank {Rank} with {CooldownReduction} CDR
 OneshotCooldownIntent get cooldown for {Champion} {Ability} spell at level {Rank} with {CooldownReduction} percent cooldown reduction
-OneshotCooldownIntent get cooldown for {Champion} {Ability} spell at level {Rank} with {CooldownReduction} c d r
+OneshotCooldownIntent get cooldown for {Champion} {Ability} spell at level {Rank} with {CooldownReduction} CDR
+OneshotCooldownIntent get cooldown for {Champion} {Ability} level {Rank} with {CooldownReduction} percent cooldown
+OneshotCooldownIntent get cooldown for {Champion} {Ability} rank {Rank} with {CooldownReduction} percent cooldown
+OneshotCooldownIntent get cooldown for {Champion} {Ability} {Rank} {CooldownReduction}
+OneshotCooldownIntent get cooldown for {Champion} {Ability} ability at rank {Rank} with {CooldownReduction} percent cooldown
+OneshotCooldownIntent get cooldown for {Champion} {Ability} ability at level {Rank} with {CooldownReduction} percent cooldown 
+OneshotCooldownIntent get cooldown for {Champion} {Ability} spell at rank {Rank} with {CooldownReduction} percent cooldown
+OneshotCooldownIntent get cooldown for {Champion} {Ability} spell at level {Rank} with {CooldownReduction} percent cooldown 
 
 OneshotCooldownIntent get cooldown on {Champion} {Ability} level {Rank} with {CooldownReduction} percent cooldown reduction
-OneshotCooldownIntent get cooldown on {Champion} {Ability} level {Rank} with {CooldownReduction} cdr
+OneshotCooldownIntent get cooldown on {Champion} {Ability} level {Rank} with {CooldownReduction} CDR
 OneshotCooldownIntent get cooldown on {Champion} {Ability} rank {Rank} with {CooldownReduction} percent cooldown reduction
-OneshotCooldownIntent get cooldown on {Champion} {Ability} rank {Rank} with {CooldownReduction} c d r
+OneshotCooldownIntent get cooldown on {Champion} {Ability} rank {Rank} with {CooldownReduction} CDR
 OneshotCooldownIntent get cooldown on {Champion} {Ability} {Rank} {CooldownReduction}
 OneshotCooldownIntent get cooldown on {Champion} {Ability} ability at rank {Rank} with {CooldownReduction} percent cooldown reduction
-OneshotCooldownIntent get cooldown on {Champion} {Ability} ability at rank {Rank} with {CooldownReduction} c d r
+OneshotCooldownIntent get cooldown on {Champion} {Ability} ability at rank {Rank} with {CooldownReduction} CDR
 OneshotCooldownIntent get cooldown on {Champion} {Ability} ability at level {Rank} with {CooldownReduction} percent cooldown reduction
-OneshotCooldownIntent get cooldown on {Champion} {Ability} ability at level {Rank} with {CooldownReduction} c d r
+OneshotCooldownIntent get cooldown on {Champion} {Ability} ability at level {Rank} with {CooldownReduction} CDR
 OneshotCooldownIntent get cooldown on {Champion} {Ability} spell at rank {Rank} with {CooldownReduction} percent cooldown reduction
-OneshotCooldownIntent get cooldown on {Champion} {Ability} spell at rank {Rank} with {CooldownReduction} c d r
+OneshotCooldownIntent get cooldown on {Champion} {Ability} spell at rank {Rank} with {CooldownReduction} CDR
 OneshotCooldownIntent get cooldown on {Champion} {Ability} spell at level {Rank} with {CooldownReduction} percent cooldown reduction
-OneshotCooldownIntent get cooldown on {Champion} {Ability} spell at level {Rank} with {CooldownReduction} c d r
-
-
+OneshotCooldownIntent get cooldown on {Champion} {Ability} spell at level {Rank} with {CooldownReduction} CDR
+OneshotCooldownIntent get cooldown on {Champion} {Ability} level {Rank} with {CooldownReduction} percent cooldown
+OneshotCooldownIntent get cooldown on {Champion} {Ability} rank {Rank} with {CooldownReduction} percent cooldown
+OneshotCooldownIntent get cooldown on {Champion} {Ability} {Rank} {CooldownReduction}
+OneshotCooldownIntent get cooldown on {Champion} {Ability} ability at rank {Rank} with {CooldownReduction} percent cooldown
+OneshotCooldownIntent get cooldown on {Champion} {Ability} ability at level {Rank} with {CooldownReduction} percent cooldown 
+OneshotCooldownIntent get cooldown on {Champion} {Ability} spell at rank {Rank} with {CooldownReduction} percent cooldown
+OneshotCooldownIntent get cooldown on {Champion} {Ability} spell at level {Rank} with {CooldownReduction} percent cooldown
 
 OneshotCooldownIntent cooldown for {Champion} {Ability} level {Rank} with {CooldownReduction} percent cooldown reduction
-OneshotCooldownIntent cooldown for {Champion} {Ability} level {Rank} with {CooldownReduction} c d r
+OneshotCooldownIntent cooldown for {Champion} {Ability} level {Rank} with {CooldownReduction} CDR
 OneshotCooldownIntent cooldown for {Champion} {Ability} rank {Rank} with {CooldownReduction} percent cooldown reduction
-OneshotCooldownIntent cooldown for {Champion} {Ability} rank {Rank} with {CooldownReduction} c d r
+OneshotCooldownIntent cooldown for {Champion} {Ability} rank {Rank} with {CooldownReduction} CDR
 OneshotCooldownIntent cooldown for {Champion} {Ability} {Rank} {CooldownReduction}
 OneshotCooldownIntent cooldown for {Champion} {Ability} ability at rank {Rank} with {CooldownReduction} percent cooldown reduction
-OneshotCooldownIntent cooldown for {Champion} {Ability} ability at rank {Rank} with {CooldownReduction} c d r
+OneshotCooldownIntent cooldown for {Champion} {Ability} ability at rank {Rank} with {CooldownReduction} CDR
 OneshotCooldownIntent cooldown for {Champion} {Ability} ability at level {Rank} with {CooldownReduction} percent cooldown reduction
-OneshotCooldownIntent cooldown for {Champion} {Ability} ability at level {Rank} with {CooldownReduction} c d r
+OneshotCooldownIntent cooldown for {Champion} {Ability} ability at level {Rank} with {CooldownReduction} CDR
 OneshotCooldownIntent cooldown for {Champion} {Ability} spell at rank {Rank} with {CooldownReduction} percent cooldown reduction
-OneshotCooldownIntent cooldown for {Champion} {Ability} spell at rank {Rank} with {CooldownReduction} c d r
+OneshotCooldownIntent cooldown for {Champion} {Ability} spell at rank {Rank} with {CooldownReduction} CDR
 OneshotCooldownIntent cooldown for {Champion} {Ability} spell at level {Rank} with {CooldownReduction} percent cooldown reduction
-OneshotCooldownIntent cooldown for {Champion} {Ability} spell at level {Rank} with {CooldownReduction} c d r
+OneshotCooldownIntent cooldown for {Champion} {Ability} spell at level {Rank} with {CooldownReduction} CDR
+OneshotCooldownIntent cooldown for {Champion} {Ability} level {Rank} with {CooldownReduction} percent cooldown
+OneshotCooldownIntent cooldown for {Champion} {Ability} rank {Rank} with {CooldownReduction} percent cooldown
+OneshotCooldownIntent cooldown for {Champion} {Ability} {Rank} {CooldownReduction}
+OneshotCooldownIntent cooldown for {Champion} {Ability} ability at rank {Rank} with {CooldownReduction} percent cooldown
+OneshotCooldownIntent cooldown for {Champion} {Ability} ability at level {Rank} with {CooldownReduction} percent cooldown 
+OneshotCooldownIntent cooldown for {Champion} {Ability} spell at rank {Rank} with {CooldownReduction} percent cooldown
+OneshotCooldownIntent cooldown for {Champion} {Ability} spell at level {Rank} with {CooldownReduction} percent cooldown
+
 
 OneshotCooldownIntent cooldown on {Champion} {Ability} level {Rank} with {CooldownReduction} percent cooldown reduction
-OneshotCooldownIntent cooldown on {Champion} {Ability} level {Rank} with {CooldownReduction} c d r
+OneshotCooldownIntent cooldown on {Champion} {Ability} level {Rank} with {CooldownReduction} CDR
 OneshotCooldownIntent cooldown on {Champion} {Ability} rank {Rank} with {CooldownReduction} percent cooldown reduction
-OneshotCooldownIntent cooldown on {Champion} {Ability} rank {Rank} with {CooldownReduction} c d r
+OneshotCooldownIntent cooldown on {Champion} {Ability} rank {Rank} with {CooldownReduction} CDR
 OneshotCooldownIntent cooldown on {Champion} {Ability} {Rank} {CooldownReduction}
 OneshotCooldownIntent cooldown on {Champion} {Ability} ability at rank {Rank} with {CooldownReduction} percent cooldown reduction
-OneshotCooldownIntent cooldown on {Champion} {Ability} ability at rank {Rank} with {CooldownReduction} c d r
+OneshotCooldownIntent cooldown on {Champion} {Ability} ability at rank {Rank} with {CooldownReduction} CDR
 OneshotCooldownIntent cooldown on {Champion} {Ability} ability at level {Rank} with {CooldownReduction} percent cooldown reduction
-OneshotCooldownIntent cooldown on {Champion} {Ability} ability at level {Rank} with {CooldownReduction} c d r
+OneshotCooldownIntent cooldown on {Champion} {Ability} ability at level {Rank} with {CooldownReduction} CDR
 OneshotCooldownIntent cooldown on {Champion} {Ability} spell at rank {Rank} with {CooldownReduction} percent cooldown reduction
-OneshotCooldownIntent cooldown on {Champion} {Ability} spell at rank {Rank} with {CooldownReduction} c d r
+OneshotCooldownIntent cooldown on {Champion} {Ability} spell at rank {Rank} with {CooldownReduction} CDR
 OneshotCooldownIntent cooldown on {Champion} {Ability} spell at level {Rank} with {CooldownReduction} percent cooldown reduction
-OneshotCooldownIntent cooldown on {Champion} {Ability} spell at level {Rank} with {CooldownReduction} c d r
+OneshotCooldownIntent cooldown on {Champion} {Ability} spell at level {Rank} with {CooldownReduction} CDR
+OneshotCooldownIntent cooldown on {Champion} {Ability} level {Rank} with {CooldownReduction} percent cooldown
+OneshotCooldownIntent cooldown on {Champion} {Ability} rank {Rank} with {CooldownReduction} percent cooldown
+OneshotCooldownIntent cooldown on {Champion} {Ability} {Rank} {CooldownReduction}
+OneshotCooldownIntent cooldown on {Champion} {Ability} ability at rank {Rank} with {CooldownReduction} percent cooldown
+OneshotCooldownIntent cooldown on {Champion} {Ability} ability at level {Rank} with {CooldownReduction} percent cooldown 
+OneshotCooldownIntent cooldown on {Champion} {Ability} spell at rank {Rank} with {CooldownReduction} percent cooldown
+OneshotCooldownIntent cooldown on {Champion} {Ability} spell at level {Rank} with {CooldownReduction} percent cooldown
 
 OneshotCooldownIntent {Champion} {Ability} level {Rank} with {CooldownReduction} percent cooldown reduction
-OneshotCooldownIntent {Champion} {Ability} level {Rank} with {CooldownReduction} c d r
+OneshotCooldownIntent {Champion} {Ability} level {Rank} with {CooldownReduction} CDR
 OneshotCooldownIntent {Champion} {Ability} rank {Rank} with {CooldownReduction} percent cooldown reduction
-OneshotCooldownIntent {Champion} {Ability} rank {Rank} with {CooldownReduction} c d r
+OneshotCooldownIntent {Champion} {Ability} rank {Rank} with {CooldownReduction} CDR
 OneshotCooldownIntent {Champion} {Ability} {Rank} {CooldownReduction}
 OneshotCooldownIntent {Champion} {Ability} ability at rank {Rank} with {CooldownReduction} percent cooldown reduction
-OneshotCooldownIntent {Champion} {Ability} ability at rank {Rank} with {CooldownReduction} c d r
+OneshotCooldownIntent {Champion} {Ability} ability at rank {Rank} with {CooldownReduction} CDR
 OneshotCooldownIntent {Champion} {Ability} ability at level {Rank} with {CooldownReduction} percent cooldown reduction
-OneshotCooldownIntent {Champion} {Ability} ability at level {Rank} with {CooldownReduction} c d r
+OneshotCooldownIntent {Champion} {Ability} ability at level {Rank} with {CooldownReduction} CDR
 OneshotCooldownIntent {Champion} {Ability} spell at rank {Rank} with {CooldownReduction} percent cooldown reduction
-OneshotCooldownIntent {Champion} {Ability} spell at rank {Rank} with {CooldownReduction} c d r
+OneshotCooldownIntent {Champion} {Ability} spell at rank {Rank} with {CooldownReduction} CDR
 OneshotCooldownIntent {Champion} {Ability} spell at level {Rank} with {CooldownReduction} percent cooldown reduction
-OneshotCooldownIntent {Champion} {Ability} spell at level {Rank} with {CooldownReduction} c d r
+OneshotCooldownIntent {Champion} {Ability} spell at level {Rank} with {CooldownReduction} CDR
+OneshotCooldownIntent {Champion} {Ability} level {Rank} with {CooldownReduction} percent cooldown
+OneshotCooldownIntent {Champion} {Ability} rank {Rank} with {CooldownReduction} percent cooldown
+OneshotCooldownIntent {Champion} {Ability} {Rank} {CooldownReduction}
+OneshotCooldownIntent {Champion} {Ability} ability at rank {Rank} with {CooldownReduction} percent cooldown
+OneshotCooldownIntent {Champion} {Ability} ability at level {Rank} with {CooldownReduction} percent cooldown 
+OneshotCooldownIntent {Champion} {Ability} spell at rank {Rank} with {CooldownReduction} percent cooldown
+OneshotCooldownIntent {Champion} {Ability} spell at level {Rank} with {CooldownReduction} percent cooldown
 
-OneshotCooldownIntent what is {Champion} {Ability} cooldown at level {Rank} with {CooldownReduction} c d r
-OneshotCooldownIntent what is {Champion} {Ability} cooldown at rank {Rank} with {CooldownReduction} c d r
+
+OneshotCooldownIntent what is {Champion} {Ability} cooldown at level {Rank} with {CooldownReduction} CDR
+OneshotCooldownIntent what is {Champion} {Ability} cooldown at rank {Rank} with {CooldownReduction} CDR
 OneshotCooldownIntent what is {Champion} {Ability} cooldown at level {Rank} with {CooldownReduction} percent cooldown reduction
 OneshotCooldownIntent what is {Champion} {Ability} cooldown at rank {Rank} with {CooldownReduction} percent cooldown reduction
 OneshotCooldownIntent what is {Champion} {Ability} cooldown at level {Rank} with {CooldownReduction} percent cooldown reduction
-OneshotCooldownIntent what is {Champion} {Ability} cooldown at rank {Rank} with {CooldownReduction} percent cdr
+OneshotCooldownIntent what is {Champion} {Ability} cooldown at rank {Rank} with {CooldownReduction} percent CDR
+OneshotCooldownIntent what is {Champion} {Ability} level {Rank} with {CooldownReduction} percent cooldown
+OneshotCooldownIntent what is {Champion} {Ability} rank {Rank} with {CooldownReduction} percent cooldown
+OneshotCooldownIntent what is {Champion} {Ability} {Rank} {CooldownReduction}
+OneshotCooldownIntent what is {Champion} {Ability} ability at rank {Rank} with {CooldownReduction} percent cooldown
+OneshotCooldownIntent what is {Champion} {Ability} ability at level {Rank} with {CooldownReduction} percent cooldown 
+OneshotCooldownIntent what is {Champion} {Ability} spell at rank {Rank} with {CooldownReduction} percent cooldown
+OneshotCooldownIntent what is {Champion} {Ability} spell at level {Rank} with {CooldownReduction} percent cooldown
+
+OneshotCooldownIntent {Champion} rank {Rank} {Ability} ability at {CooldownReduction} percent cooldown
+OneshotCooldownIntent {Champion} rank {Rank} {Ability} ability at {CooldownReduction} percent CDR
+OneshotCooldownIntent {Champion} rank {Rank} {Ability} ability at {CooldownReduction} CDR
+OneshotCooldownIntent {Champion} level {Rank} {Ability} ability at {CooldownReduction} percent cooldown
+OneshotCooldownIntent {Champion} level {Rank} {Ability} ability at {CooldownReduction} percent CDR
+OneshotCooldownIntent {Champion} level {Rank} {Ability} ability at {CooldownReduction} CDR
+OneshotCooldownIntent {Champion} rank {Rank} {Ability} at {CooldownReduction} percent cooldown
+OneshotCooldownIntent {Champion} rank {Rank} {Ability} at {CooldownReduction} percent CDR
+OneshotCooldownIntent {Champion} rank {Rank} {Ability} at {CooldownReduction} CDR
+OneshotCooldownIntent {Champion} level {Rank} {Ability} at {CooldownReduction} percent cooldown
+OneshotCooldownIntent {Champion} level {Rank} {Ability} at {CooldownReduction} percent CDR
+OneshotCooldownIntent {Champion} level {Rank} {Ability} at {CooldownReduction} CDR
+
+OneshotCooldownIntent {Champion} rank {Rank} {Ability} ability with {CooldownReduction} percent cooldown
+OneshotCooldownIntent {Champion} rank {Rank} {Ability} ability with {CooldownReduction} percent CDR
+OneshotCooldownIntent {Champion} rank {Rank} {Ability} ability with {CooldownReduction} CDR
+OneshotCooldownIntent {Champion} level {Rank} {Ability} ability with {CooldownReduction} percent cooldown
+OneshotCooldownIntent {Champion} level {Rank} {Ability} ability with {CooldownReduction} percent CDR
+OneshotCooldownIntent {Champion} level {Rank} {Ability} ability with {CooldownReduction} CDR
+OneshotCooldownIntent {Champion} rank {Rank} {Ability} with {CooldownReduction} percent cooldown
+OneshotCooldownIntent {Champion} rank {Rank} {Ability} with {CooldownReduction} percent CDR
+OneshotCooldownIntent {Champion} rank {Rank} {Ability} with {CooldownReduction} CDR
+OneshotCooldownIntent {Champion} level {Rank} {Ability} with {CooldownReduction} percent cooldown
+OneshotCooldownIntent {Champion} level {Rank} {Ability} with {CooldownReduction} percent CDR
+OneshotCooldownIntent {Champion} level {Rank} {Ability} with {CooldownReduction} CDR
+
+OneshotCooldownIntent {Champion} {Ability} at rank {Rank} with {CooldownReduction} percent cooldown reduction
+OneshotCooldownIntent {Champion} {Ability} at rank {Rank} with {CooldownReduction} CDR
+OneshotCooldownIntent {Champion} {Ability} at level {Rank} with {CooldownReduction} percent cooldown reduction
+OneshotCooldownIntent {Champion} {Ability} at level {Rank} with {CooldownReduction} CDR
+
+OneshotCooldownIntent {Champion} {Ability} at rank {Rank} with {CooldownReduction} percent cooldown
+OneshotCooldownIntent {Champion} {Ability} at level {Rank} with {CooldownReduction} percent cooldown 
+OneshotCooldownIntent {Champion} {Ability} at rank {Rank} with {CooldownReduction} percent cooldown
+OneshotCooldownIntent {Champion} {Ability} at level {Rank} with {CooldownReduction} percent cooldown
 
 SupportedChampionsIntent what champions
 SupportedChampionsIntent what champions are supported

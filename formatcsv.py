@@ -5,7 +5,7 @@ output = open('pronun.csv', 'w+')
 def formatter(csv_file):
     with open(csv_file) as csvfile:
         for row in csvfile:
-            row = row.replace(', ', ',')
+            row = row[:1].lower() + row[1:]
             output.write(row)
 
 

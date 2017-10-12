@@ -1,9 +1,7 @@
 import logging
-import os
-import sys
-import requests
 import json
 import csv
+import jellyfish
 from flask import Flask, render_template
 from flask_ask import Ask, statement, question, session
 
@@ -50,7 +48,7 @@ def launched():
 @ask.intent('SupportedChampionsIntent')
 def supported_champions():
     with open('LIST_OF_CHAMPIONS.txt') as championfile:
-        champions = ','.join([line.rstrip('\n') for line in championfile])
+        champions = ', '.join([line.rstrip('\n') for line in championfile])
 
     list_champions_text = render_template('list_champions', champions=champions)
     list_champions_reprompt_text = render_template('list_champions_reprompt')
@@ -61,15 +59,17 @@ def supported_champions():
                                             'rank' : 'Rank',
                                             'cdr' : 'CooldownReduction'})
 def get_cooldown(champion, ability, rank, cdr):
-    try:
-        champion_name = pronunciation[champion.title()]
-        champion_data = json_data['data'][champion_name]
-    except IndexError:
-        logging.debug('Bad pronunciation with: ' + champion)
 
     try:
-        cooldown = get_spell_cooldown(champion_data, ability, rank, cdr)
-        if cdr is NoneType:
+        sanitized_champion_name = sanitize_name(champion)
+        champion_name = pronunciation[sanitized_champion_name]
+        champion_data = json_data['data'][champion_name]
+    except IndexError:
+        print('open jellyfish here')
+
+    cooldown = get_spell_cooldown(champion_data, ability, rank, cdr)
+    try:
+        if cdr is None:
             return statement("{}'s rank {} {} ability at 0% cooldown reduction is {} seconds."
             .format(champion, rank, ability, cdr))
         else:
@@ -81,6 +81,14 @@ def get_cooldown(champion, ability, rank, cdr):
         pass
         # NO COOLDOWN
 
+
+def closest_pronunciation_matches(champion_name):
+    pass
+
+def sanitize_name(champion_name):
+    sanitized_name = champion_name.replace(' ', '')
+    return sanitized_name
+
 def get_spell_cooldown(champion_data, ability, rank, cdr):
     keybinding = int()
     if ability.lower() is 'q':
@@ -89,19 +97,15 @@ def get_spell_cooldown(champion_data, ability, rank, cdr):
         keybinding = int(1)
     elif ability.lower() is 'e':
         keybinding = int(2)
-    elif ability.lower() is 'r':
+    elif ability.lower() is 'r' or ability.lower() is 'ult' or ability.lower() is 'ultimate':
         keybinding = int(3)
 
     rank_index = int(rank) - 1
-    try:
-        cooldown_reduction = float(cdr) / 100
-    except TypeError:
-        cooldown_reduction = 0
+    cooldown_reduction = float(cdr) / 100
     spell = champion_data['spells'][keybinding] 
-
     spell_cooldown = spell['cooldown'][rank_index]
     cooldown = spell_cooldown * (1 - cooldown_reduction)
-    return cooldown
+    return round(cooldown, 2)
 
 @ask.session_ended
 def session_ended():
