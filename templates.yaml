@@ -19,14 +19,16 @@ champion_dialog_reprompt: Which champion?
 
 ability_dialog: Which ability on {{ champion }} would like you like information on?
 
-ability_dialog_reprompt: Which ability?
+ability_dialog_reprompt: Which ability? You can say Q, W, E, R, or ultimate.
 
 rank_dialog: What rank is {{ ability }} ability?
 
-rank_dialog_reprompt: What rank?
+rank_dialog_reprompt: What rank? Max rank for most abilities is five. Max rank for most ultimates is three.
 
 cdr_dialog: How much cooldown reduction does {{ champion }} have?
 
-cdr_dialog_reprompt: How much cooldown reduction?
+cdr_dialog_reprompt: How much cooldown reduction? State a number
+
+overall_dialog: Which champion ability cooldown do you need information on?
 
 bye: Goodbye

@@ -23,6 +23,27 @@
             ]
         },
         {
+            "intent" : "DialogCooldownIntent",
+            "slots" : [
+                {
+                    "name" : "Champion",
+                    "type" : "LIST_OF_CHAMPIONS"
+                },
+                {
+                    "name" : "Ability",
+                    "type" : "LIST_OF_ABILITIES"
+                },
+                {
+                    "name" : "Rank",
+                    "type" : "AMAZON.Number"
+                },
+                {
+                    "name" : "CooldownReduction",
+                    "type" : "AMAZON.Number"
+                }
+            ]
+        },
+        {
             "intent": "SupportedChampionsIntent"
         },
         {

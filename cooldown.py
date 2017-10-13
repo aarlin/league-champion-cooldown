@@ -1,7 +1,6 @@
 import logging
 import json
 import csv
-import jellyfish
 from flask import Flask, render_template
 from flask_ask import Ask, statement, question, session
 
@@ -46,33 +45,56 @@ def supported_champions():
     list_champions_reprompt_text = render_template('list_champions_reprompt')
     return question(list_champions_text).reprompt(list_champions_reprompt_text)
 
+@ask.intent('DialogCooldownIntent', mapping = {'champion' : 'Champion',
+                                            'ability' : 'Ability',
+                                            'rank' : 'Rank',
+                                            'cdr' : 'CooldownReduction'})
+def dialog_cooldown(champion, ability, rank, cdr):
+    if champion is not None:
+        session.attributes[SESSION_CHAMPION] = champion
+        if SESSION_ABILITY not in session.attributes:
+            return _dialog_ability()
+        if SESSION_RANK not in session.attributes:
+            return _dialog_rank()
+        if SESSION_CDR not in session.attributes:
+            return _dialog_cdr()
+        return _get_cooldown(champion, ability, rank, cdr)
+    elif ability is not None:
+        session.attributes[SESSION_ABILITY] = ability
+        if SESSION_CHAMPION not in session.attributes:
+            return _dialog_champion()
+        if SESSION_RANK not in session.attributes:
+            return _dialog_rank()
+        if SESSION_CDR not in session.attributes:
+            return _dialog_cdr()
+        return _get_cooldown(champion, ability, rank, cdr)
+    elif rank is not None:
+        session.attributes[SESSION_RANK] = rank
+        if SESSION_CHAMPION not in session.attributes:
+            return _dialog_champion()
+        if SESSION_ABILITY not in session.attributes:
+            return _dialog_ability()
+        if SESSION_CDR not in session.attributes:
+            return _dialog_cdr()
+        return _get_cooldown(champion, ability, rank, cdr)
+    elif cdr is not None:
+        session.attributes[SESSION_CDR] = cdr
+        if SESSION_CHAMPION not in session.attributes:
+            return _dialog_champion()
+        if SESSION_ABILITY not in session.attributes:
+            return _dialog_ability()
+        if SESSION_RANK not in session.attributes:
+            return _dialog_cdr()
+        return _get_cooldown(champion, ability, rank, cdr)
+    else:
+        return _dialog_no_slot()
+
 @ask.intent('OneshotCooldownIntent', mapping = {'champion' : 'Champion',
                                             'ability' : 'Ability',
                                             'rank' : 'Rank',
                                             'cdr' : 'CooldownReduction'})
-def get_cooldown(champion, ability, rank, cdr):
-    if champion is None:
-        return _dialog_champion()
-    elif ability is None:
-        return _dialog_ability()
-    elif rank is None:
-        return _dialog_rank()
-    elif cdr == '?':
-        return _dialog_cdr(champion)
-
-    logging.debug(champion)
-    logging.debug(ability)
-    logging.debug(rank)
-    logging.debug(cdr)
-
-    sanitized_champion_name = sanitize_name(champion)   # CLEAN UP NAME BEFORE LOOK UP
-    champion_name = pronunciation[sanitized_champion_name]  # RETURN CHAMPION NAME THAT JSONDATA RECOGNIZES
-    champion_data = json_data['data'][champion_name]
-
-    cooldown = get_spell_cooldown(champion_data, ability, rank, cdr)
-    
-    return statement("{}'s rank {} {} ability at {}% cooldown reduction is {} seconds."
-        .format(champion_name, rank, ability, cdr, cooldown))
+def oneshot_cooldown(champion, ability, rank, cdr):
+    return _get_cooldown(champion, ability, rank, cdr)
 
 
 def closest_pronunciation_matches(pronunciation):
@@ -99,8 +121,35 @@ def sanitize_name(champion_name):
     sanitized_name = champion_name.lower()
     return sanitized_name
 
-def get_spell_cooldown(champion_data, ability, rank, cdr):
+def _get_cooldown(champion, ability, rank, cdr):
     ''' Create correct binding to ability and keyboard press, and calculate cooldown'''
+    logging.debug(champion)
+    logging.debug(ability)
+    logging.debug(rank)
+    logging.debug(cdr)
+    logging.debug(session.attributes.get(SESSION_CHAMPION))
+    logging.debug(session.attributes.get(SESSION_ABILITY))
+    logging.debug(session.attributes.get(SESSION_RANK))
+    logging.debug(session.attributes.get(SESSION_CDR))
+
+    if session.attributes.get(SESSION_CHAMPION) is not None:
+        champion = session.attributes.get(SESSION_CHAMPION)
+        logging.debug('HERE')
+    if session.attributes.get(SESSION_ABILITY) is not None:
+        ability = session.attributes.get(SESSION_ABILITY)
+    if session.attributes.get(SESSION_RANK) is not None:
+        rank = session.attributes.get(SESSION_RANK)
+    if session.attributes.get(SESSION_CDR) is not None:
+        cdr = session.attributes.get(SESSION_CDR)
+
+    logging.debug(champion)
+    logging.debug(ability)
+    logging.debug(rank)
+    logging.debug(cdr)
+
+    sanitized_champion_name = sanitize_name(champion)   # CLEAN UP NAME BEFORE LOOK UP
+    champion_name = pronunciation[sanitized_champion_name]  # RETURN CHAMPION NAME THAT JSONDATA RECOGNIZES
+    champion_data = json_data['data'][champion_name]
 
     # USE == because we are checking equality, not if they are same object (is) 
     keybinding = 0
@@ -117,8 +166,9 @@ def get_spell_cooldown(champion_data, ability, rank, cdr):
     cooldown_reduction = float(cdr) / 100
     spell = champion_data['spells'][keybinding] 
     spell_cooldown = spell['cooldown'][rank_index]
-    cooldown = spell_cooldown * (1 - cooldown_reduction)
-    return round(cooldown, 2)
+    cooldown = round(spell_cooldown * (1 - cooldown_reduction), 2)
+    return statement("{}'s rank {} {} ability at {}% cooldown is {} seconds."
+        .format(champion_name, rank, ability, cdr, cooldown))
 
 def _dialog_champion():
     champion_dialog_text = render_template('champion_dialog')
@@ -135,10 +185,14 @@ def _dialog_rank():
     rank_dialog_reprompt_text = render_template('rank_dialog_reprompt')
     return question(rank_dialog_text).reprompt(rank_dialog_reprompt_text)
 
-def _dialog_cdr(champion):
-    cdr_dialog_text = render_template('cdr_dialog', champion=champion)
+def _dialog_cdr():
+    cdr_dialog_text = render_template('cdr_dialog')
     cdr_dialog_reprompt_text = render_template('cdr_dialog_reprompt')
     return question(cdr_dialog_text).reprompt(cdr_dialog_reprompt_text)
+
+def _dialog_no_slot():
+    overall_dialog_text = render_template('overall_dialog')
+    return question(overall_dialog_text).reprompt(overall_dialog_text)
 
 @ask.session_ended
 def session_ended():
