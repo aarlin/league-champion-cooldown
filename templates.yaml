@@ -11,6 +11,8 @@ list_champions: |
 
 list_champions_reprompt: Which champion would you like cooldown information for?
 
+max_rank_error: This ability does not go to this rank.
+
 champion_dialog: Which champion would you like cooldown information on?
 
 champion_dialog_reprompt: Which champion?

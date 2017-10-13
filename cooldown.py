@@ -14,14 +14,6 @@ app = Flask(__name__)
 ask = Ask(app, "/")
 logging.getLogger('flask_ask').setLevel(logging.DEBUG)
 
-# url = 'http://ddragon.leagueoflegends.com/cdn/7.19.1/data/en_US/championFull.json'
-# headers = {'User-Agent' : 'Morellonomicon'}
-# response = requests.get(url, headers=headers)
-# json_data = json.loads(response.text, timeout=60)
-
-# with open('championFull.json') as json_file:
-#     json_data = json.load('json_file')
-
 full_data = open('championFull.json')
 json_data = json.load(full_data)
 pronunciation = {}
@@ -59,46 +51,67 @@ def supported_champions():
                                             'rank' : 'Rank',
                                             'cdr' : 'CooldownReduction'})
 def get_cooldown(champion, ability, rank, cdr):
+    if champion is None:
+        return _dialog_champion()
+    elif ability is None:
+        return _dialog_ability()
+    elif rank is None:
+        return _dialog_rank()
+    elif cdr == '?':
+        return _dialog_cdr(champion)
 
-    try:
-        sanitized_champion_name = sanitize_name(champion)
-        champion_name = pronunciation[sanitized_champion_name]
-        champion_data = json_data['data'][champion_name]
-    except IndexError:
-        print('open jellyfish here')
+    logging.debug(champion)
+    logging.debug(ability)
+    logging.debug(rank)
+    logging.debug(cdr)
+
+    sanitized_champion_name = sanitize_name(champion)   # CLEAN UP NAME BEFORE LOOK UP
+    champion_name = pronunciation[sanitized_champion_name]  # RETURN CHAMPION NAME THAT JSONDATA RECOGNIZES
+    champion_data = json_data['data'][champion_name]
 
     cooldown = get_spell_cooldown(champion_data, ability, rank, cdr)
-    try:
-        if cdr is None:
-            return statement("{}'s rank {} {} ability at 0% cooldown reduction is {} seconds."
-            .format(champion, rank, ability, cdr))
-        else:
-            return statement("{}'s rank {} {} ability at {}% cooldown reduction is {} seconds."
-            .format(champion, rank, ability, cdr, cooldown))
-    except IndexError:
-        return statement("There seems to be a problem with your query")
-    except ValueError:
-        pass
-        # NO COOLDOWN
+    
+    return statement("{}'s rank {} {} ability at {}% cooldown reduction is {} seconds."
+        .format(champion_name, rank, ability, cdr, cooldown))
 
 
-def closest_pronunciation_matches(champion_name):
-    pass
+def closest_pronunciation_matches(pronunciation):
+    ''' Return a list of the top three matches to the pronunciation '''
+
+    # go through the list to calculate and keep a top 3 list based on rating... how??
+    current_top = 0
+    champion_match = ""
+
+    with open('LIST_OF_CHAMPIONS.txt') as champion_list:
+        for champion in champion_list:
+            rating = jellyfish.match_rating_comparison(pronunciation, champion[:-1])
+            logging.debug(pronunciation)
+            logging.debug(rating)
+            if rating > current_top:
+                champion_match = champion
+    
+    return champion_match
 
 def sanitize_name(champion_name):
-    sanitized_name = champion_name.replace(' ', '')
+    for char in [' ', '.', '\'']:
+        if char in champion_name:
+            champion_name = champion_name.replace(char, '')
+    sanitized_name = champion_name.lower()
     return sanitized_name
 
 def get_spell_cooldown(champion_data, ability, rank, cdr):
-    keybinding = int()
-    if ability.lower() is 'q':
-        keybinding = int(0)
-    elif ability.lower() is 'w':
-        keybinding = int(1)
-    elif ability.lower() is 'e':
-        keybinding = int(2)
-    elif ability.lower() is 'r' or ability.lower() is 'ult' or ability.lower() is 'ultimate':
-        keybinding = int(3)
+    ''' Create correct binding to ability and keyboard press, and calculate cooldown'''
+
+    # USE == because we are checking equality, not if they are same object (is) 
+    keybinding = 0
+    if ability.lower() == 'q':
+        keybinding = 0
+    elif ability.lower() == 'w':
+        keybinding = 1
+    elif ability.lower() == 'e':
+        keybinding = 2
+    elif ability.lower() == 'r' or ability.lower() == 'ult' or ability.lower() == 'ultimate':
+        keybinding = 3
 
     rank_index = int(rank) - 1
     cooldown_reduction = float(cdr) / 100
@@ -106,6 +119,26 @@ def get_spell_cooldown(champion_data, ability, rank, cdr):
     spell_cooldown = spell['cooldown'][rank_index]
     cooldown = spell_cooldown * (1 - cooldown_reduction)
     return round(cooldown, 2)
+
+def _dialog_champion():
+    champion_dialog_text = render_template('champion_dialog')
+    champion_dialog_reprompt_text = render_template('champion_dialog_reprompt')
+    return question(champion_dialog_text).reprompt(champion_dialog_reprompt_text)
+
+def _dialog_ability():
+    ability_dialog_text = render_template('ability_dialog')
+    ability_dialog_reprompt_text = render_template('ability_dialog_reprompt')
+    return question(ability_dialog_text).reprompt(ability_dialog_reprompt_text)
+
+def _dialog_rank():
+    rank_dialog_text = render_template('rank_dialog')
+    rank_dialog_reprompt_text = render_template('rank_dialog_reprompt')
+    return question(rank_dialog_text).reprompt(rank_dialog_reprompt_text)
+
+def _dialog_cdr(champion):
+    cdr_dialog_text = render_template('cdr_dialog', champion=champion)
+    cdr_dialog_reprompt_text = render_template('cdr_dialog_reprompt')
+    return question(cdr_dialog_text).reprompt(cdr_dialog_reprompt_text)
 
 @ask.session_ended
 def session_ended():

@@ -95,8 +95,6 @@ Function should handle NoneType, to ask them again what is for {{ variable }}
 
 Use Alexa learn something to get sample responses if Alexa didn't hear correctly
 
-Should I remove all spaces before the call or after?
-
 Theres an issue with csv file after deployment. If it keeps updating, how will I update zappa with a new champion json file without destroying the csv file (reverting it back to unupdated state?)
 
 Need to update LIST_OF_CHAMPIONS.txt and championFull.json
@@ -108,3 +106,12 @@ https://www.dropbox.com/developers-v1/core/start/python
 
 Use amazon s3 to hold json file??
 Use dynamodb or mongodb to hold key - value pairs of pronunciations
+
+Just noticed if I allow after only one time to bind pronunciation to champion name based off user...
+Could be bad if they bind incorrectly and is forever stuck as that binding
+
+http://leagueoflegends.wikia.com/wiki/Azir
+
+maybe use this?? for cooldowns at least
+
+parse through wikia to find all cooldowns
