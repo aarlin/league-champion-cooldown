@@ -32,10 +32,12 @@ Press 'Ask Morellonomicon'
 
 Deploy using AWS Lambda
 
-`virtualenv --python=/usr/bin/python2.7 venv`
-`source venv/bin/activate`
+`virtualenv league`
+`source league/bin/activate`
 `pip install flask flask-ask zappa awscli requests`
-
+`zappa init`
+`zappa deploy dev`
+Paste output from Zappa into AWS skill url
 
 Zappa requires Python 2.7 virtual env...
 I used Anaconda Python 3.6 virtual env...
@@ -66,36 +68,11 @@ Use Python 3.6
 
 Alexa Skill linked to amazon.developer and alexa account. 
 
-Originally thought to use a pronunciation file to hold what I heard 
-from Alexa but it is too naive...
-
-Shouldnt use a csv file to hold all pronunciations...
-Rather we should use a phonetic matching algorithm...
-Looks like jellyfish or fuzzywuzzy
-
-`pip install jellyfish`
-
-Constantly update csv file to add new pronunciation matches??
-Use in conjunction with library that finds closest match for champion name?
-
-Normalization of data before hand?
-Running time? O(n) based on champion names... compare each champion name with alexa pronunciation
-Compare with jaro distance?
-
-
 Edit json file to replace MonkeyKing with WuKong
-
-jellyfish.match_rating_comparison(s1, s2)
-
-Check the csv file first, then do match_rating_comparison if csv doesn't hold pronunciation...
-Then if that doesn't work, get all the champions that hold true, put in list a state "Did you mean: a. Veigar b. Vi ..."
-Store the result into csv file with the champion name
 
 Function should handle NoneType, to ask them again what is for {{ variable }}
 
 Use Alexa learn something to get sample responses if Alexa didn't hear correctly
-
-Theres an issue with csv file after deployment. If it keeps updating, how will I update zappa with a new champion json file without destroying the csv file (reverting it back to unupdated state?)
 
 Need to update LIST_OF_CHAMPIONS.txt and championFull.json
 
@@ -107,11 +84,27 @@ https://www.dropbox.com/developers-v1/core/start/python
 Use amazon s3 to hold json file??
 Use dynamodb or mongodb to hold key - value pairs of pronunciations
 
-Just noticed if I allow after only one time to bind pronunciation to champion name based off user...
-Could be bad if they bind incorrectly and is forever stuck as that binding
 
 http://leagueoflegends.wikia.com/wiki/Azir
 
 maybe use this?? for cooldowns at least
 
 parse through wikia to find all cooldowns
+
+go previous in asking
+
+issues
+
+passive
+previous
+json and list - should be in db
+s ...?
+clean readme
+
+issue with dialog with rank and cooldown reduction
+cooldown reduction in percent, concise
+welcome text should be more informative
+resubmit certification
+updated json... crawler?
+reask dialog if unknown mapping from oneshot
+wikia scraper rather than use json

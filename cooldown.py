@@ -28,14 +28,6 @@ def launched():
     help_text = render_template('help')
     return question(welcome_text).reprompt(help_text)
 
-# @ask.intent('DialogCooldownIntent', mapping = {'champion' : 'Champion'})
-# def get_champion(champion):
-#     if champion is not None:
-#         if SESSION_ABILITY not in session.attributes:
-#             session.attributes[SESSION_CHAMPION] = champion
-#             return _dialog_ability(champion)
-#     elif ability is not None:
-
 @ask.intent('SupportedChampionsIntent')
 def supported_champions():
     with open('LIST_OF_CHAMPIONS.txt') as championfile:
@@ -53,38 +45,38 @@ def dialog_cooldown(champion, ability, rank, cdr):
     if champion is not None:
         session.attributes[SESSION_CHAMPION] = champion
         if SESSION_ABILITY not in session.attributes:
-            return _dialog_ability()
+            return _dialog_ability(champion)
         if SESSION_RANK not in session.attributes:
-            return _dialog_rank()
+            return _dialog_rank(ability)
         if SESSION_CDR not in session.attributes:
-            return _dialog_cdr()
+            return _dialog_cdr(champion)
         return _get_cooldown(champion, ability, rank, cdr)
     elif ability is not None:
         session.attributes[SESSION_ABILITY] = ability
         if SESSION_CHAMPION not in session.attributes:
             return _dialog_champion()
         if SESSION_RANK not in session.attributes:
-            return _dialog_rank()
+            return _dialog_rank(ability)
         if SESSION_CDR not in session.attributes:
-            return _dialog_cdr()
+            return _dialog_cdr(champion)
         return _get_cooldown(champion, ability, rank, cdr)
     elif rank is not None:
         session.attributes[SESSION_RANK] = rank
         if SESSION_CHAMPION not in session.attributes:
             return _dialog_champion()
         if SESSION_ABILITY not in session.attributes:
-            return _dialog_ability()
+            return _dialog_ability(champion)
         if SESSION_CDR not in session.attributes:
-            return _dialog_cdr()
+            return _dialog_cdr(champion)
         return _get_cooldown(champion, ability, rank, cdr)
     elif cdr is not None:
         session.attributes[SESSION_CDR] = cdr
         if SESSION_CHAMPION not in session.attributes:
             return _dialog_champion()
         if SESSION_ABILITY not in session.attributes:
-            return _dialog_ability()
+            return _dialog_ability(champion)
         if SESSION_RANK not in session.attributes:
-            return _dialog_cdr()
+            return _dialog_rank(ability)
         return _get_cooldown(champion, ability, rank, cdr)
     else:
         return _dialog_no_slot()
@@ -94,27 +86,33 @@ def dialog_cooldown(champion, ability, rank, cdr):
                                             'rank' : 'Rank',
                                             'cdr' : 'CooldownReduction'})
 def oneshot_cooldown(champion, ability, rank, cdr):
+    ''' User can give a one statement query asking about champion cooldown'''
+    # ADD CONDITIONAL STATEMENTS IF ALEXA DOES NOT HEAR ONE OR MORE MAPPING
+    if cdr is None:
+        session.attributes[SESSION_CHAMPION] = champion
+        session.attributes[SESSION_ABILITY] = ability
+        session.attributes[SESSION_RANK] = rank
+        return _dialog_cdr(champion)
+    if rank is None:
+        session.attributes[SESSION_CHAMPION] = champion
+        session.attributes[SESSION_ABILITY] = ability
+        session.attributes[SESSION_CDR] = cdr
+        return _dialog_rank(ability)
+    if ability is None:
+        session.attributes[SESSION_CHAMPION] = champion
+        session.attributes[SESSION_RANK] = rank
+        session.attributes[SESSION_CDR] = cdr
+        return _dialog_ability(champion)
+    if champion is None:
+        session.attributes[SESSION_ABILITY] = ability
+        session.attributes[SESSION_RANK] = rank
+        session.attributes[SESSION_CDR] = cdr
+        return _dialog_champion()
+
     return _get_cooldown(champion, ability, rank, cdr)
 
-
-def closest_pronunciation_matches(pronunciation):
-    ''' Return a list of the top three matches to the pronunciation '''
-
-    # go through the list to calculate and keep a top 3 list based on rating... how??
-    current_top = 0
-    champion_match = ""
-
-    with open('LIST_OF_CHAMPIONS.txt') as champion_list:
-        for champion in champion_list:
-            rating = jellyfish.match_rating_comparison(pronunciation, champion[:-1])
-            logging.debug(pronunciation)
-            logging.debug(rating)
-            if rating > current_top:
-                champion_match = champion
-    
-    return champion_match
-
 def sanitize_name(champion_name):
+    ''' Remove extraneous punctuation before look up in dictionary '''
     for char in [' ', '.', '\'']:
         if char in champion_name:
             champion_name = champion_name.replace(char, '')
@@ -123,18 +121,10 @@ def sanitize_name(champion_name):
 
 def _get_cooldown(champion, ability, rank, cdr):
     ''' Create correct binding to ability and keyboard press, and calculate cooldown'''
-    logging.debug(champion)
-    logging.debug(ability)
-    logging.debug(rank)
-    logging.debug(cdr)
-    logging.debug(session.attributes.get(SESSION_CHAMPION))
-    logging.debug(session.attributes.get(SESSION_ABILITY))
-    logging.debug(session.attributes.get(SESSION_RANK))
-    logging.debug(session.attributes.get(SESSION_CDR))
 
+    # GRAB SESSION ATTRIBUTES IF USER WENT DIALOG ROUTE
     if session.attributes.get(SESSION_CHAMPION) is not None:
         champion = session.attributes.get(SESSION_CHAMPION)
-        logging.debug('HERE')
     if session.attributes.get(SESSION_ABILITY) is not None:
         ability = session.attributes.get(SESSION_ABILITY)
     if session.attributes.get(SESSION_RANK) is not None:
@@ -175,18 +165,21 @@ def _dialog_champion():
     champion_dialog_reprompt_text = render_template('champion_dialog_reprompt')
     return question(champion_dialog_text).reprompt(champion_dialog_reprompt_text)
 
-def _dialog_ability():
-    ability_dialog_text = render_template('ability_dialog')
+def _dialog_ability(champion):
+    ability_dialog_text = render_template('ability_dialog', champion=champion)
     ability_dialog_reprompt_text = render_template('ability_dialog_reprompt')
     return question(ability_dialog_text).reprompt(ability_dialog_reprompt_text)
 
-def _dialog_rank():
-    rank_dialog_text = render_template('rank_dialog')
+def _dialog_rank(ability):
+    if ability is not None:
+        rank_dialog_text = render_template('rank_dialog', ability=ability)
+    else:
+        rank_dialog_text = render_template('rank_dialog_alt')
     rank_dialog_reprompt_text = render_template('rank_dialog_reprompt')
     return question(rank_dialog_text).reprompt(rank_dialog_reprompt_text)
 
-def _dialog_cdr():
-    cdr_dialog_text = render_template('cdr_dialog')
+def _dialog_cdr(champion):
+    cdr_dialog_text = render_template('cdr_dialog', champion=champion)
     cdr_dialog_reprompt_text = render_template('cdr_dialog_reprompt')
     return question(cdr_dialog_text).reprompt(cdr_dialog_reprompt_text)
 

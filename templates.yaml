@@ -1,9 +1,9 @@
-welcome : Welcome to Champion Cooldown
+welcome : Welcome to Champion Cooldown. Which champion would you like information on?
 help: |
     I can help you find information on ability cooldowns for champions in League of Legends.
-    You can open Champion Cooldown and ask a question like, 
-    get cooldown on Q ability for Brand at rank 5 with 10% cdr.
-    I can also walk you through the process
+    You can ask a phrase like 'Bard rank three ultimate at forty percent CDR'. Another example is,
+    Evelynn Q ability at rank three with ten percent cooldown.
+    I can also walk you through the process. Start by saying a champion name.
 
 list_champions: |
     Currently, I know cooldown information for these champions: {{ champions }}
@@ -23,12 +23,14 @@ ability_dialog_reprompt: Which ability? You can say Q, W, E, R, or ultimate.
 
 rank_dialog: What rank is {{ ability }} ability?
 
+rank_dialog_alt: What rank is the ability?
+
 rank_dialog_reprompt: What rank? Max rank for most abilities is five. Max rank for most ultimates is three.
 
-cdr_dialog: How much cooldown reduction does {{ champion }} have?
+cdr_dialog: How much cooldown reduction? State a number followed by 'percent'
 
-cdr_dialog_reprompt: How much cooldown reduction? State a number
+cdr_dialog_reprompt: How much cooldown reduction? State something like 'nineteen percent'
 
 overall_dialog: Which champion ability cooldown do you need information on?
 
-bye: Goodbye
+bye: Closing champion cooldown
