@@ -1,6 +1,7 @@
 import logging
 import json
 import csv
+import requests
 from flask import Flask, render_template
 from flask_ask import Ask, statement, question, session
 
@@ -13,8 +14,16 @@ app = Flask(__name__)
 ask = Ask(app, "/")
 logging.getLogger('flask_ask').setLevel(logging.DEBUG)
 
-full_data = open('championFull.json')
-json_data = json.load(full_data)
+#full_data = open('championFull.json')
+#json_data = json.load(full_data)
+
+version_url = 'http://ddragon.leagueoflegends.com/api/versions.json'
+version_headers = {'Accept-Charset' : 'utf-8'}
+version_response = requests.get(version_url, headers=version_headers)
+version_json = json.loads(version_response.text)
+version = version_json[0]
+logging.debug(version)
+
 pronunciation = {}
 
 with open('pronunciation.csv') as csvfile:  
@@ -139,7 +148,16 @@ def _get_cooldown(champion, ability, rank, cdr):
 
     sanitized_champion_name = sanitize_name(champion)   # CLEAN UP NAME BEFORE LOOK UP
     champion_name = pronunciation[sanitized_champion_name]  # RETURN CHAMPION NAME THAT JSONDATA RECOGNIZES
-    champion_data = json_data['data'][champion_name]
+
+    if champion_name == 'WuKong':
+        champion_name = 'MonkeyKing'    # convert
+
+    url = "http://ddragon.leagueoflegends.com/cdn/{}/data/en_US/champion/{}.json".format(version, champion_name)
+    headers = {'Accept-Charset' : 'utf-8'}
+    response = requests.get(url, headers=headers)
+    champion_data = json.loads(response.text)['data'][champion_name]
+
+    #champion_data = json_data['data'][champion_name]    
 
     # USE == because we are checking equality, not if they are same object (is) 
     keybinding = 0

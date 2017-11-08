@@ -17,7 +17,7 @@ champion_dialog: Which champion would you like cooldown information on?
 
 champion_dialog_reprompt: Which champion?
 
-ability_dialog: Which ability on {{ champion }} would like you like information on?
+ability_dialog: Which ability on {{ champion }} would like you information on?
 
 ability_dialog_reprompt: Which ability? You can say Q, W, E, R, or ultimate.
 

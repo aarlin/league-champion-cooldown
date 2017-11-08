@@ -58,6 +58,7 @@ Have u started `python morellonomicon.py` along with `ngrok http 5000`?
 `pip install flask flask-ask zappa awscli requests`
 `zappa init`
 `zappa deploy dev`
+change runtime in zappa_settings.json to python3.6
 Paste output from Zappa into AWS skill url
 
 Zappa requires Python 2.7 virtual env...
@@ -102,12 +103,6 @@ querying the api and parsing data?
 querying but have a cache for previous data?
 querying without usage of framework?
 
-http://leagueoflegends.wikia.com/wiki/Azir
-
-maybe use this?? for cooldowns at least
-
-parse through wikia to find all cooldowns
-
 go previous in asking
 
 
@@ -126,8 +121,3 @@ Need to update LIST_OF_CHAMPIONS.txt and championFull.json
 
 zappa exclude
 
-Dropbox host csv file
-https://www.dropbox.com/developers-v1/core/start/python
-
-Use amazon s3 to hold json file??
-Use dynamodb or mongodb to hold key - value pairs of pronunciations
