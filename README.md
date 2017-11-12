@@ -6,7 +6,8 @@ This is the code repository for the Amazon Alexa skill named League of Legends C
 
 ```
 champion-cooldown             
-├── cooldown.py                                   ├── LIST_OF_CHAMPIONS.txt         
+├── cooldown.py  
+├── LIST_OF_CHAMPIONS.txt           
 ├── pronunciation.csv             
 ├── README.md                     
 ├── speech_assets                   
@@ -31,73 +32,25 @@ what is Tryndamere R cooldown at 20%
 ### Running on local
 `git clone`   
 `cd`  
-`virtualenv league`
-`source league/bin/activate`
+`virtualenv league`  
+`source league/bin/activate`  
 `pip install flask flask-ask zappa awscli requests`  
 Fill out information for new Alexa skill ...  
 `ngrok http 5000` in new terminal    
-`python cooldown.py`
+`python cooldown.py`  
 Type out response under Service Simulator under Amazon Alexa skill  
 Press 'Ask champion cooldown'   
 
 ### Deploy using AWS Lambda
 
-`virtualenv league`
-`source league/bin/activate`
-`pip install flask flask-ask zappa awscli requests`
-`zappa init`
-`zappa deploy dev`
-change runtime in zappa_settings.json to python3.6
-Paste output from Zappa into AWS skill url
-
-Cassiopeia has Python 3.6 requirement
-How does Zappa grab dependencies?
-How can I call Riot API w/o Cassiopeia?
-
-How would this virtual env use my API key?
-
-If Zappa keeps installing as different version from virtual env,
-`pip uninstall zappa` on own local OS
-
-Can't open from different folder? Have to use from same directory
-Can't use sqlite3 for caching requests ...?
-Can't grab from urllib fast enough. Time out for big json file. Have to use local json
-
-
-Would constantly need to be updated... when new patch hits
-
+`virtualenv league`  
+`source league/bin/activate`  
+`pip install flask flask-ask zappa awscli requests`  
+`zappa init`  
+`zappa deploy dev`  
+change runtime in zappa_settings.json to python3.6  
+Paste output from Zappa into AWS skill url  
 
 ## Debugging <hr/>
 
 `zappa tail --since 1m`
-
-Unable to import module 'handler': No module named builtins
-
-Use Python 3.6
-
-### Issues <hr/>
-
-passive
-previous
-
-How fast is it to query Alexa and get response if...
-querying but have a cache for previous data?
-querying without usage of framework?
-
-Problem with Alexa listening to champion names
-
-Alexa Skill linked to amazon.developer and alexa account. 
-
-Use Alexa learn something to get sample responses if Alexa didn't hear correctly
-
-Need to update LIST_OF_CHAMPIONS.txt and championFull.json
-
-zappa exclude
-
-Zappa requires Python 2.7 virtual env...
-I used Anaconda Python 3.6 virtual env...
-Zappa doesn't support Anaconda
-
-`conda create --name league python=3.6`   
-`source activate league`    
-`pip install git+https://github.com/meraki-analytics/cassiopeia.git`
