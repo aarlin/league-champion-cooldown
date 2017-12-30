@@ -157,8 +157,6 @@ def _get_cooldown(champion, ability, rank, cdr):
     response = requests.get(url, headers=headers)
     champion_data = json.loads(response.text)['data'][champion_name]
 
-    #champion_data = json_data['data'][champion_name]    
-
     # USE == because we are checking equality, not if they are same object (is) 
     keybinding = 0
     if ability.lower() == 'q':
