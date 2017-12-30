@@ -24,12 +24,12 @@ version_json = json.loads(version_response.text)
 version = version_json[0]
 logging.debug(version)
 
-pronunciation = {}
+#pronunciation = {}
 
-with open('pronunciation.csv') as csvfile:  
-    reader = csv.DictReader(csvfile)
-    for row in reader:
-        pronunciation[row['alexa_pronunciation']] = row['champion_name']
+# with open('pronunciation.csv') as csvfile:  
+#     reader = csv.DictReader(csvfile)
+#     for row in reader:
+#         pronunciation[row['alexa_pronunciation']] = row['champion_name']
 
 @ask.launch
 def launched():
@@ -122,10 +122,10 @@ def oneshot_cooldown(champion, ability, rank, cdr):
 
 def sanitize_name(champion_name):
     ''' Remove extraneous punctuation before look up in dictionary '''
+    sanitized_name = champion_name.title()
     for char in [' ', '.', '\'']:
-        if char in champion_name:
-            champion_name = champion_name.replace(char, '')
-    sanitized_name = champion_name.lower()
+        if char in sanitized_name:
+            sanitized_name = sanitized_name.replace(char, '')
     return sanitized_name
 
 def _get_cooldown(champion, ability, rank, cdr):
@@ -146,8 +146,11 @@ def _get_cooldown(champion, ability, rank, cdr):
     logging.debug(rank)
     logging.debug(cdr)
 
-    sanitized_champion_name = sanitize_name(champion)   # CLEAN UP NAME BEFORE LOOK UP
-    champion_name = pronunciation[sanitized_champion_name]  # RETURN CHAMPION NAME THAT JSONDATA RECOGNIZES
+    champion_name = sanitize_name(champion)   # CLEAN UP NAME BEFORE LOOK UP
+    # champion_name = pronunciation[sanitized_champion_name]  # RETURN CHAMPION NAME THAT JSONDATA RECOGNIZES
+
+    # if champion_name == 'WuKong':
+    #     champion_name = 'MonkeyKing'    # convert
 
     if champion_name == 'WuKong':
         champion_name = 'MonkeyKing'    # convert
