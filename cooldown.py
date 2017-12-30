@@ -24,12 +24,12 @@ version_json = json.loads(version_response.text)
 version = version_json[0]
 logging.debug(version)
 
-#pronunciation = {}
+pronunciation = {}
 
-# with open('pronunciation.csv') as csvfile:  
-#     reader = csv.DictReader(csvfile)
-#     for row in reader:
-#         pronunciation[row['alexa_pronunciation']] = row['champion_name']
+with open('pronunciation.csv') as csvfile:  
+    reader = csv.DictReader(csvfile)
+    for row in reader:
+        pronunciation[row['alexa_pronunciation']] = row['champion_name']
 
 @ask.launch
 def launched():
@@ -146,11 +146,11 @@ def _get_cooldown(champion, ability, rank, cdr):
     logging.debug(rank)
     logging.debug(cdr)
 
-    champion_name = sanitize_name(champion)   # CLEAN UP NAME BEFORE LOOK UP
-    # champion_name = pronunciation[sanitized_champion_name]  # RETURN CHAMPION NAME THAT JSONDATA RECOGNIZES
-
-    # if champion_name == 'WuKong':
-    #     champion_name = 'MonkeyKing'    # convert
+    try:
+        sanitized_champion_name = sanitize_name(champion)   # CLEAN UP NAME BEFORE LOOK UP
+        champion_name = pronunciation[sanitized_champion_name]  # RETURN CHAMPION NAME THAT JSONDATA RECOGNIZES
+    except KeyError:
+        champion_name = sanitized_champion_name
 
     if champion_name == 'WuKong':
         champion_name = 'MonkeyKing'    # convert
