@@ -155,6 +155,8 @@ def _get_cooldown(champion, ability, rank, cdr):
     if champion_name == 'WuKong':
         champion_name = 'MonkeyKing'    # convert
 
+    logging.debug("Santized champion name is {}".format(champion_name))
+
     url = "http://ddragon.leagueoflegends.com/cdn/{}/data/en_US/champion/{}.json".format(version, champion_name)
     headers = {'Accept-Charset' : 'utf-8'}
     response = requests.get(url, headers=headers)
