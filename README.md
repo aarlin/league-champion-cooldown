@@ -1,4 +1,4 @@
-## League of Legends Champion Cooldown - Alexa Skill <hr/>
+## League of Legends Champion Cooldown - Alexa Skill 
 
 [Link to Alexa Skill](https://www.amazon.com/League-of-Legends-Champion-Cooldown/dp/B076FN3YS2/ref=sr_1_1?s=digital-skills&ie=UTF8&qid=1509420389&sr=1-1&keywords=league+of+legends+champion+cooldown&dpID=7137yMTCy7L&preST=_SY300_QL70_&dpSrc=srch)
 
@@ -19,7 +19,7 @@ champion-cooldown
 └── templates.yaml
 ``` 
 
-## Sample Utterances <hr/>
+## Sample Utterances 
 
 Look under [sample utterances](https://github.com/fompei/league-champion-cooldown/blob/master/speech_assets/sample_utterances.txt) for examples.
 
@@ -27,7 +27,7 @@ what is Tryndamere Q cooldown at rank 5 with 10% cooldown
 what is Tryndamere E cooldown  
 what is Tryndamere R cooldown at 20%  
 
-## Instructions  <hr/>
+## Instructions  
 
 ### Running on local
 `git clone`   
@@ -51,7 +51,10 @@ Press 'Ask champion cooldown'
 change runtime in zappa_settings.json to python3.6  
 Paste output from Zappa into AWS skill url  
 
-## Debugging <hr/>
+## Debugging 
 
 `zappa update` - after making changes to code  
 `zappa tail --since 1m`
+
+repeat
+speak... -> new champ or new ability?

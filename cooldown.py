@@ -326,9 +326,9 @@ def repeat():
     elif state == 'rank':
         return _dialog_rank(session.attributes.get(SESSION_ABILITY))
     elif state == 'cdr':
-        return _dialog_cdr(session.attributes.get(SESSION_CDR))
+        return _dialog_cdr(session.attributes.get(SESSION_CHAMPION))
     else:
-        return launch()
+        return launched()
 
 @ask.intent("AMAZON.YesIntent")
 def yes():

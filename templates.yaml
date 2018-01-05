@@ -41,6 +41,9 @@ overall_dialog: Which champion ability cooldown do you need information on?
 
 bye: Closing champion cooldown
 
-invalid_previous: There is no previous prompt from here
+calculation: <speak> 
+                {{ champion }}'s rank {{ rank }} {{ ability }} ability at {{ cdr }}% cooldown is {{ cooldown }} seconds. <break strength="strong"/> 
+                Would you like to look up another champion? 
+            </speak>  
 
-calculation: <speak>{{ champion }}'s rank {{ rank }} {{ ability }} ability at {{ cdr }}% cooldown is {{ cooldown }} seconds. <break strength="strong"> Would you like to look up another champion? </speak>. 
+invalid_previous: There is no previous prompt from here 
