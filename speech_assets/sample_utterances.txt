@@ -156,18 +156,19 @@ OneshotCooldownIntent {Champion} {Ability} at level {Rank} with {CooldownReducti
 OneshotCooldownIntent {Champion} {Ability} at rank {Rank} with {CooldownReduction} percent cooldown
 OneshotCooldownIntent {Champion} {Ability} at level {Rank} with {CooldownReduction} percent cooldown
 
-DialogCooldownIntent {Champion}
-DialogCooldownIntent {Ability}
-DialogCooldownIntent {Ability} ability
-DialogCooldownIntent {Ability} spell
-DialogCooldownIntent {Rank}
-DialogCooldownIntent rank {Rank}
-DialogCooldownIntent level {Rank}
-DialogCooldownIntent {CooldownReduction} percent
-DialogCooldownIntent {CooldownReduction} CDR
-DialogCooldownIntent {CooldownReduction} percent CDR
-DialogCooldownIntent {CooldownReduction} percent cooldown reduction
-DialogCooldownIntent {CooldownReduction} percent reduction
+ChampionIntent {Champion}
+AbilityIntent {Ability}
+AbilityIntent {Ability} ability
+AbilityIntent {Ability} spell
+RankIntent {Rank}
+RankIntent rank {Rank}
+RankIntent level {Rank}
+CooldownReductionIntent {CooldownReduction}
+CooldownReductionIntent {CooldownReduction} percent
+CooldownReductionIntent {CooldownReduction} CDR
+CooldownReductionIntent {CooldownReduction} percent CDR
+CooldownReductionIntent {CooldownReduction} percent cooldown reduction
+CooldownReductionIntent {CooldownReduction} percent reduction
 
 SupportedChampionsIntent what champions
 SupportedChampionsIntent what champions are supported

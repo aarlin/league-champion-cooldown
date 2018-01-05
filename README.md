@@ -53,4 +53,5 @@ Paste output from Zappa into AWS skill url
 
 ## Debugging <hr/>
 
+`zappa update` - after making changes to code  
 `zappa tail --since 1m`

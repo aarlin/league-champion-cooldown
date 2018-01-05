@@ -90,6 +90,70 @@ def dialog_cooldown(champion, ability, rank, cdr):
     else:
         return _dialog_no_slot()
 
+@ask.intent('ChampionIntent', mapping = {'champion' : 'Champion'})
+def get_champion(champion):
+    session.attributes[SESSION_CHAMPION] = champion
+    ability = session.attributes.get(SESSION_ABILITY)
+    rank = session.attributes.get(SESSION_RANK)
+    cdr = session.attributes.get(SESSION_CDR)
+
+    if ability is None:
+        return _dialog_ability(champion)
+    if rank is None:
+        return _dialog_rank(ability)
+    if cdr is None:
+        return _dialog_cdr(champion)
+    if all(values is not None for values in session.attributes.values()):
+        return _get_cooldown(champion, ability, rank, cdr)
+
+@ask.intent('AbilityIntent', mapping = {'ability' : 'Ability'})
+def get_ability(ability):
+    session.attributes[SESSION_ABILITY] = ability
+    champion = session.attributes.get(SESSION_CHAMPION)
+    rank = session.attributes.get(SESSION_RANK)
+    cdr = session.attributes.get(SESSION_CDR)
+
+    if champion is None:
+        return _dialog_champion()
+    if rank is None:
+        return _dialog_rank(ability)
+    if cdr is None:
+        return _dialog_cdr(champion)
+    if all(values is not None for values in session.attributes.values()):
+        return _get_cooldown(champion, ability, rank, cdr)
+
+@ask.intent('RankIntent', mapping = {'rank' : 'Rank'})
+def get_rank(rank):
+    session.attributes[SESSION_RANK] = rank
+    champion = session.attributes.get(SESSION_CHAMPION)
+    ability = session.attributes.get(SESSION_ABILITY)
+    cdr = session.attributes.get(SESSION_CDR)
+
+    if champion is None:
+        return _dialog_champion()
+    if ability is None:
+        return _dialog_ability(champion)
+    if cdr is None:
+        return _dialog_cdr(champion)
+    if all(values is not None for values in session.attributes.values()):
+        return _get_cooldown(champion, ability, rank, cdr)
+
+@ask.intent('CooldownReductionIntent', mapping = {'cdr' : 'CooldownReduction'})
+def get_cdr(cdr):
+    session.attributes[SESSION_CDR] = cdr
+    champion = session.attributes.get(SESSION_CHAMPION)
+    ability = session.attributes.get(SESSION_ABILITY)
+    rank = session.attributes.get(SESSION_RANK)
+
+    if champion is None:
+        return _dialog_champion()
+    if ability is None:
+        return _dialog_ability(champion)
+    if rank is None:
+        return _dialog_rank(ability)
+    if all(values is not None for values in session.attributes.values()):
+        return _get_cooldown(champion, ability, rank, cdr)
+
 @ask.intent('OneshotCooldownIntent', mapping = {'champion' : 'Champion',
                                             'ability' : 'Ability',
                                             'rank' : 'Rank',
@@ -155,7 +219,7 @@ def _get_cooldown(champion, ability, rank, cdr):
     if champion_name == 'WuKong':
         champion_name = 'MonkeyKing'    # convert
 
-    logging.debug("Santized champion name is {}".format(champion_name))
+    logging.debug("Sanitized champion name is {}".format(champion_name))
 
     url = "http://ddragon.leagueoflegends.com/cdn/{}/data/en_US/champion/{}.json".format(version, champion_name)
     headers = {'Accept-Charset' : 'utf-8'}
@@ -187,20 +251,26 @@ def _dialog_champion():
     return question(champion_dialog_text).reprompt(champion_dialog_reprompt_text)
 
 def _dialog_ability(champion):
-    ability_dialog_text = render_template('ability_dialog', champion=champion)
+    if champion is None:
+        ability_dialog_text = render_template('ability_dialog_alternative')
+    else:
+        ability_dialog_text = render_template('ability_dialog', champion=champion)
     ability_dialog_reprompt_text = render_template('ability_dialog_reprompt')
     return question(ability_dialog_text).reprompt(ability_dialog_reprompt_text)
 
 def _dialog_rank(ability):
-    if ability is not None:
-        rank_dialog_text = render_template('rank_dialog', ability=ability)
+    if ability is None:
+        rank_dialog_text = render_template('rank_dialog_alternative')
     else:
-        rank_dialog_text = render_template('rank_dialog_alt')
+        rank_dialog_text = render_template('rank_dialog', ability=ability)
     rank_dialog_reprompt_text = render_template('rank_dialog_reprompt')
     return question(rank_dialog_text).reprompt(rank_dialog_reprompt_text)
 
 def _dialog_cdr(champion):
-    cdr_dialog_text = render_template('cdr_dialog', champion=champion)
+    if champion is None:
+        cdr_dialog_text = render_template('cdr_dialog_alternative')
+    else:
+        cdr_dialog_text = render_template('cdr_dialog', champion=champion)
     cdr_dialog_reprompt_text = render_template('cdr_dialog_reprompt')
     return question(cdr_dialog_text).reprompt(cdr_dialog_reprompt_text)
 
@@ -227,6 +297,14 @@ def stop():
 def cancel():
     bye_text = render_template('bye')
     return statement(bye_text)
+
+@ask.intent("AMAZON.StartOverIntent")
+def startover():
+    session.attributes[SESSION_CHAMPION] = None
+    session.attributes[SESSION_ABILITY] = None
+    session.attributes[SESSION_RANK] = None
+    session.attributes[SESSION_CDR] = None
+    return launched()
 
 if __name__ == "__main__":
     app.run()

@@ -2,20 +2,35 @@
     "intents" : 
     [
         {
-            "intent" : "OneshotCooldownIntent",
-            "slots" : [
+            "intent" : "ChampionIntent",
+            "slots" :[
                 {
                     "name" : "Champion",
                     "type" : "LIST_OF_CHAMPIONS"
-                },
+                }
+            ]
+        },
+        {
+            "intent" : "AbilityIntent",
+            "slots" :[
                 {
                     "name" : "Ability",
                     "type" : "LIST_OF_ABILITIES"
-                },
+                }
+            ]
+        },
+        {
+            "intent" : "RankIntent",
+            "slots" :[
                 {
                     "name" : "Rank",
                     "type" : "AMAZON.Number"
-                },
+                }
+            ]
+        },
+        {
+            "intent" : "CooldownReductionIntent",
+            "slots" :[
                 {
                     "name" : "CooldownReduction",
                     "type" : "AMAZON.Number"
@@ -23,7 +38,7 @@
             ]
         },
         {
-            "intent" : "DialogCooldownIntent",
+            "intent" : "OneshotCooldownIntent",
             "slots" : [
                 {
                     "name" : "Champion",
@@ -54,6 +69,9 @@
         },
         {
             "intent" : "AMAZON.CancelIntent"
+        },
+        {
+            "intent" : "AMAZON.StartOverIntent"
         }
     ]
 }
