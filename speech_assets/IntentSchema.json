@@ -68,6 +68,15 @@
             "intent" : "AMAZON.StopIntent"
         },
         {
+            "intent" : "AMAZON.PreviousIntent"
+        },
+        {
+            "intent" : "AMAZON.YesIntent"
+        },
+        {
+            "intent" : "AMAZON.NoIntent"
+        },
+        {
             "intent" : "AMAZON.CancelIntent"
         },
         {
