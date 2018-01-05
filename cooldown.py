@@ -123,6 +123,11 @@ def get_ability(ability):
 
 @ask.intent('RankIntent', mapping = {'rank' : 'Rank'})
 def get_rank(rank):
+    # SINCE THERE IS Amazon.NUMBER ALREADY MAPPED HERE, WE CAN'T GET TO CDR WITHOUT THIS CODE
+    state = session.attributes.get(SESSION_STATE)
+    if state == 'cdr':
+        return get_cdr(rank)
+
     session.attributes[SESSION_RANK] = rank
     champion = session.attributes.get(SESSION_CHAMPION)
     ability = session.attributes.get(SESSION_ABILITY)
@@ -310,6 +315,20 @@ def previous():
     else:
         invalid_previous_text = render_template('invalid_previous')
         return statement(invalid_previous_text)
+
+@ask.intent("AMAZON.RepeatIntent")
+def repeat():
+    state = session.attributes.get(SESSION_STATE)
+    if state == 'champion':
+        return _dialog_champion()
+    elif state == 'ability':
+        return _dialog_ability(session.attributes.get(SESSION_CHAMPION))
+    elif state == 'rank':
+        return _dialog_rank(session.attributes.get(SESSION_ABILITY))
+    elif state == 'cdr':
+        return _dialog_cdr(session.attributes.get(SESSION_CDR))
+    else:
+        return launch()
 
 @ask.intent("AMAZON.YesIntent")
 def yes():

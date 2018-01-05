@@ -71,6 +71,9 @@
             "intent" : "AMAZON.PreviousIntent"
         },
         {
+            "intent" : "AMAZON.RepeatIntent"
+        },
+        {
             "intent" : "AMAZON.YesIntent"
         },
         {
