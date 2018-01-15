@@ -33,9 +33,13 @@ rank_dialog_reprompt: What rank? Max rank for most abilities is five. Max rank f
 
 cdr_dialog: How much cooldown reduction does {{ champion }} have?
 
-cdr_dialog_alternative: How much cooldown does the champion have?
+cdr_dialog_alternative: What percent is their cooldown reduction?
 
-cdr_dialog_reprompt: How much cooldown reduction does the champion have currently?
+cdr_dialog_reprompt: What is their cooldown reduction percent?
+
+cdr_dialog_bad: Please state a valid number for the champion's cooldown reduction.
+
+cdr_dialog_bad_reprompt: State a number followed by percent.
 
 overall_dialog: Which champion ability cooldown do you need information on?
 

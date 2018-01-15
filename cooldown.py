@@ -3,7 +3,7 @@ import json
 import csv
 import requests
 from flask import Flask, render_template
-from flask_ask import Ask, statement, question, session
+from flask_ask import Ask, statement, question, session, convert_errors
 
 SESSION_STATE = "state"
 SESSION_CHAMPION = "champion"
@@ -91,23 +91,27 @@ def supported_champions():
 
 @ask.intent('ChampionIntent', mapping = {'champion' : 'Champion'})
 def get_champion(champion):
-    session.attributes[SESSION_CHAMPION] = champion
+    state = session.attributes.get(SESSION_STATE)
+    if state == 'champion' or state == 'launch':
+        session.attributes[SESSION_CHAMPION] = champion
     ability = session.attributes.get(SESSION_ABILITY)
     rank = session.attributes.get(SESSION_RANK)
     cdr = session.attributes.get(SESSION_CDR)
 
     if ability is None:
-        return _dialog_ability(champion)
+        return _dialog_ability()
     if rank is None:
-        return _dialog_rank(ability)
+        return _dialog_rank()
     if cdr is None:
-        return _dialog_cdr(champion)
+        return _dialog_cdr()
     if all(values is not None for values in session.attributes.values()):
         return _get_cooldown(champion, ability, rank, cdr)
 
 @ask.intent('AbilityIntent', mapping = {'ability' : 'Ability'})
 def get_ability(ability):
-    session.attributes[SESSION_ABILITY] = ability
+    state = session.attributes.get(SESSION_STATE)
+    if state == 'ability':
+        session.attributes[SESSION_ABILITY] = ability
     champion = session.attributes.get(SESSION_CHAMPION)
     rank = session.attributes.get(SESSION_RANK)
     cdr = session.attributes.get(SESSION_CDR)
@@ -115,9 +119,9 @@ def get_ability(ability):
     if champion is None:
         return _dialog_champion()
     if rank is None:
-        return _dialog_rank(ability)
+        return _dialog_rank()
     if cdr is None:
-        return _dialog_cdr(champion)
+        return _dialog_cdr()
     if all(values is not None for values in session.attributes.values()):
         return _get_cooldown(champion, ability, rank, cdr)
 
@@ -127,8 +131,8 @@ def get_rank(rank):
     state = session.attributes.get(SESSION_STATE)
     if state == 'cdr':
         return get_cdr(rank)
-
-    session.attributes[SESSION_RANK] = rank
+    elif state == 'rank':
+        session.attributes[SESSION_RANK] = rank
     champion = session.attributes.get(SESSION_CHAMPION)
     ability = session.attributes.get(SESSION_ABILITY)
     cdr = session.attributes.get(SESSION_CDR)
@@ -136,15 +140,23 @@ def get_rank(rank):
     if champion is None:
         return _dialog_champion()
     if ability is None:
-        return _dialog_ability(champion)
+        return _dialog_ability()
     if cdr is None:
-        return _dialog_cdr(champion)
+        return _dialog_cdr()
     if all(values is not None for values in session.attributes.values()):
         return _get_cooldown(champion, ability, rank, cdr)
 
 @ask.intent('CooldownReductionIntent', mapping = {'cdr' : 'CooldownReduction'})
 def get_cdr(cdr):
-    session.attributes[SESSION_CDR] = cdr
+    state = session.attributes.get(SESSION_STATE)
+    if state == 'cdr':
+        if cdr == '?':
+            # IF USER GIVES BAD MAPPING ex. {furniture} percent, THEN HANDLE IT
+            cdr_dialog_bad_text = render_template('cdr_dialog_bad')
+            cdr_dialog_bad_text_reprompt = render_template('cdr_dialog_bad_reprompt')
+            return question(cdr_dialog_bad_text).reprompt(cdr_dialog_bad_text_reprompt)
+        else:
+            session.attributes[SESSION_CDR] = cdr
     champion = session.attributes.get(SESSION_CHAMPION)
     ability = session.attributes.get(SESSION_ABILITY)
     rank = session.attributes.get(SESSION_RANK)
@@ -152,9 +164,9 @@ def get_cdr(cdr):
     if champion is None:
         return _dialog_champion()
     if ability is None:
-        return _dialog_ability(champion)
+        return _dialog_ability()
     if rank is None:
-        return _dialog_rank(ability)
+        return _dialog_rank()
     if all(values is not None for values in session.attributes.values()):
         return _get_cooldown(champion, ability, rank, cdr)
 
@@ -169,17 +181,17 @@ def oneshot_cooldown(champion, ability, rank, cdr):
         session.attributes[SESSION_CHAMPION] = champion
         session.attributes[SESSION_ABILITY] = ability
         session.attributes[SESSION_RANK] = rank
-        return _dialog_cdr(champion)
+        return _dialog_cdr()
     if rank is None:
         session.attributes[SESSION_CHAMPION] = champion
         session.attributes[SESSION_ABILITY] = ability
         session.attributes[SESSION_CDR] = cdr
-        return _dialog_rank(ability)
+        return _dialog_rank()
     if ability is None:
         session.attributes[SESSION_CHAMPION] = champion
         session.attributes[SESSION_RANK] = rank
         session.attributes[SESSION_CDR] = cdr
-        return _dialog_ability(champion)
+        return _dialog_ability()
     if champion is None:
         session.attributes[SESSION_ABILITY] = ability
         session.attributes[SESSION_RANK] = rank
@@ -257,8 +269,9 @@ def _dialog_champion():
     champion_dialog_reprompt_text = render_template('champion_dialog_reprompt')
     return question(champion_dialog_text).reprompt(champion_dialog_reprompt_text)
 
-def _dialog_ability(champion):
+def _dialog_ability():
     session.attributes[SESSION_STATE] = "ability"
+    champion = session.attributes.get(SESSION_CHAMPION)
     if champion is None:
         ability_dialog_text = render_template('ability_dialog_alternative')
     else:
@@ -266,8 +279,9 @@ def _dialog_ability(champion):
     ability_dialog_reprompt_text = render_template('ability_dialog_reprompt', champion=champion)
     return question(ability_dialog_text).reprompt(ability_dialog_reprompt_text)
 
-def _dialog_rank(ability):
+def _dialog_rank():
     session.attributes[SESSION_STATE] = "rank"
+    ability = session.attributes.get(SESSION_ABILITY)
     if ability is None:
         rank_dialog_text = render_template('rank_dialog_alternative')
     else:
@@ -275,8 +289,9 @@ def _dialog_rank(ability):
     rank_dialog_reprompt_text = render_template('rank_dialog_reprompt', ability=ability)
     return question(rank_dialog_text).reprompt(rank_dialog_reprompt_text)
 
-def _dialog_cdr(champion):
+def _dialog_cdr():
     session.attributes[SESSION_STATE] = "cdr"
+    champion = session.attributes.get(SESSION_CHAMPION)
     if champion is None:
         cdr_dialog_text = render_template('cdr_dialog_alternative')
     else:
