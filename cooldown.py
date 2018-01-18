@@ -45,50 +45,6 @@ def supported_champions():
     list_champions_reprompt_text = render_template('list_champions_reprompt')
     return question(list_champions_text).reprompt(list_champions_reprompt_text)
 
-# @ask.intent('DialogCooldownIntent', mapping = {'champion' : 'Champion',
-#                                             'ability' : 'Ability',
-#                                             'rank' : 'Rank',
-#                                             'cdr' : 'CooldownReduction'})
-# def dialog_cooldown(champion, ability, rank, cdr):
-#     if champion is not None:
-#         session.attributes[SESSION_CHAMPION] = champion
-#         if SESSION_ABILITY not in session.attributes:
-#             return _dialog_ability(champion)
-#         if SESSION_RANK not in session.attributes:
-#             return _dialog_rank(ability)
-#         if SESSION_CDR not in session.attributes:
-#             return _dialog_cdr(champion)
-#         return _get_cooldown(champion, ability, rank, cdr)
-#     elif ability is not None:
-#         session.attributes[SESSION_ABILITY] = ability
-#         if SESSION_CHAMPION not in session.attributes:
-#             return _dialog_champion()
-#         if SESSION_RANK not in session.attributes:
-#             return _dialog_rank(ability)
-#         if SESSION_CDR not in session.attributes:
-#             return _dialog_cdr(champion)
-#         return _get_cooldown(champion, ability, rank, cdr)
-#     elif rank is not None:
-#         session.attributes[SESSION_RANK] = rank
-#         if SESSION_CHAMPION not in session.attributes:
-#             return _dialog_champion()
-#         if SESSION_ABILITY not in session.attributes:
-#             return _dialog_ability(champion)
-#         if SESSION_CDR not in session.attributes:
-#             return _dialog_cdr(champion)
-#         return _get_cooldown(champion, ability, rank, cdr)
-#     elif cdr is not None:
-#         session.attributes[SESSION_CDR] = cdr
-#         if SESSION_CHAMPION not in session.attributes:
-#             return _dialog_champion()
-#         if SESSION_ABILITY not in session.attributes:
-#             return _dialog_ability(champion)
-#         if SESSION_RANK not in session.attributes:
-#             return _dialog_rank(ability)
-#         return _get_cooldown(champion, ability, rank, cdr)
-#     else:
-#         return _dialog_no_slot()
-
 @ask.intent('ChampionIntent', mapping = {'champion' : 'Champion'})
 def get_champion(champion):
     state = session.attributes.get(SESSION_STATE)
