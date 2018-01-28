@@ -51,6 +51,13 @@ Press 'Ask champion cooldown'
 change runtime in zappa_settings.json to python3.6  
 Paste output from Zappa into AWS skill url  
 
+## Testing without an Amazon Echo
+
+1. [Go to this link and install the skill to your account](https://www.amazon.com/League-of-Legends-Champion-Cooldown/dp/B076FN3YS2/ref=sr_1_1?s=digital-skills&ie=UTF8&qid=1509420389&sr=1-1&keywords=league+of+legends+champion+cooldown&dpID=7137yMTCy7L&preST=_SY300_QL70_&dpSrc=srch)  
+2. Go to https://echosim.io/welcome and login.   
+3. Ask Alexa to open champion cooldwn  
+
+
 ## Debugging 
 
 `zappa update` - after making changes to code  
