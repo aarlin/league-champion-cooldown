@@ -45,6 +45,7 @@ Jax
 Jayce
 Jhin
 Jinx
+Kaisa
 Kalista
 Karma
 Karthus
