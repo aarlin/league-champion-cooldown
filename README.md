@@ -30,38 +30,50 @@ what is Tryndamere R cooldown at 20%
 ## Instructions  
 
 ### Running on local
-`git clone`   
-`cd`  
-`virtualenv league`  
-`source league/bin/activate`  
-`pip install flask flask-ask zappa awscli requests`  
-Fill out information for new Alexa skill ...  
-`ngrok http 5000` in new terminal    
-`python cooldown.py`  
-Type out response under Service Simulator under Amazon Alexa skill  
-Press 'Ask champion cooldown'   
+1. `git clone`   
+2. `cd`  
+3. `virtualenv league`  
+4. `source league/bin/activate`  
+5. `pip install flask flask-ask zappa awscli requests`  
+6. Fill out information for new Alexa skill ...  
+7. `ngrok http 5000` in new terminal    
+8. `python cooldown.py`  
+9. Type out response under Service Simulator under Amazon Alexa skill  
+10. Press 'Ask champion cooldown'   
 
 ### Deploy using AWS Lambda
 
-`virtualenv league`  
-`source league/bin/activate`  
-`pip install flask flask-ask zappa awscli requests`  
-`zappa init`  
-`zappa deploy dev`  
-change runtime in zappa_settings.json to python3.6  
-Paste output from Zappa into AWS skill url  
+1. `git clone`   
+2. `cd` 
+3. `virtualenv league`  
+4. `source league/bin/activate`  
+5. `pip install flask flask-ask zappa awscli requests`  
+6. `zappa init`  
+7. `zappa deploy dev`  
+8. Change the runtime in zappa_settings.json to python3.6  
+9. Paste output from Zappa into AWS skill url  
 
-## Testing without an Amazon Echo
+### Testing without an Amazon Echo
 
-1. [Go to this link and install the skill to your account](https://www.amazon.com/League-of-Legends-Champion-Cooldown/dp/B076FN3YS2/ref=sr_1_1?s=digital-skills&ie=UTF8&qid=1509420389&sr=1-1&keywords=league+of+legends+champion+cooldown&dpID=7137yMTCy7L&preST=_SY300_QL70_&dpSrc=srch)  
+1. [Go to this link and install the skill to your Amazon account](https://www.amazon.com/League-of-Legends-Champion-Cooldown/dp/B076FN3YS2/ref=sr_1_1?s=digital-skills&ie=UTF8&qid=1509420389&sr=1-1&keywords=league+of+legends+champion+cooldown&dpID=7137yMTCy7L&preST=_SY300_QL70_&dpSrc=srch)  
 2. Go to https://echosim.io/welcome and login.   
-3. Ask Alexa to open champion cooldwn  
+3. Ask Alexa to 'open champion cooldown'.  
 
 
 ## Debugging 
 
-`zappa update` - after making changes to code  
-`zappa tail --since 1m`
+1. Change directory to same file location as cooldown.py
+2. Run `zappa update` after making changes to code  
+3. Monitor queries made to Alexa using `zappa tail --since 1m`  
 
-repeat
-speak... -> new champ or new ability?
+Type `zappa help` for more information on Zappa
+
+## Features
+
+Users are able to go through a conversation with Alexa if they don't know how to use the one shot intent.
+
+They can say 'start over' to reprompt Alexa to start a new query.
+
+Repeating the query is simply said by 'repeat'.
+
+If the user wants to go to the previous query, state 'previous'.
