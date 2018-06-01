@@ -82,6 +82,7 @@ Olaf
 Orianna
 Ornn
 Pantheon
+Pyke
 Poppy
 Quinn
 Rakan
