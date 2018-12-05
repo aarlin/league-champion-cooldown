@@ -59,6 +59,17 @@ what is Tryndamere R cooldown at 20%
 2. Go to https://echosim.io/welcome and login.   
 3. Ask Alexa to 'open champion cooldown'.  
 
+## Updating for New Champions
+1. Update LIST_OF_CHAMPIONS.txt under speech_assets/customSlotTypes  
+2. Update pronunciation.csv to include the new champion name and Alexa  picked up name  
+ex. Nico,Neeko  
+    Neeko,Neeko  
+
+3. Update LIST_OF_CHAMPIONS on Alexa Dashboard for the skill  
+4. Run `zappa update`  
+5. Test using `zappa tail --since 1m` after asking Alexa for the new champion  
+
+*Note*: This is a csv file, don't include the space between comma. Also uppercase the two seperate names
 
 ## Debugging 
 
@@ -67,6 +78,16 @@ what is Tryndamere R cooldown at 20%
 3. Monitor queries made to Alexa using `zappa tail --since 1m`  
 
 Type `zappa help` for more information on Zappa
+
+## Troubleshooing
+
+If you encounter this error when installing flask-ask:  
+ModuleNotFoundError: No module named 'pip.req'  
+
+Run the following commands
+`pip install --upgrade "pip<10"`  
+`pip install flask-ask`  
+`pip install --upgrade pip`  
 
 ## Features
 

@@ -74,6 +74,7 @@ Morgana
 Nami
 Nasus
 Nautilus
+Neeko
 Nidalee
 Nocturne
 Nunu
