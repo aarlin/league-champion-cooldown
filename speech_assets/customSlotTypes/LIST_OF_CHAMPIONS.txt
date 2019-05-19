@@ -133,6 +133,7 @@ Xerath
 XinZhao
 Yasuo
 Yorick
+Yuumi
 Zac
 Zed
 Ziggs
