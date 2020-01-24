@@ -39,7 +39,7 @@ what is Tryndamere R cooldown at 20%
 7. `ngrok http 5000` in new terminal    
 8. `python cooldown.py`  
 9. Type out response under Service Simulator under Amazon Alexa skill  
-10. Press 'Ask champion cooldown'   
+10. Press 'Ask champion cooldown'
 
 ### Deploy using AWS Lambda
 
@@ -51,7 +51,8 @@ what is Tryndamere R cooldown at 20%
 6. `zappa init`  
 7. `zappa deploy dev`  
 8. Change the runtime in zappa_settings.json to python3.6  
-9. Paste output from Zappa into AWS skill url  
+9. Paste deployment URL to Endpoint > Default Region > HTTPS  
+10. Choose `My development endpoint is a sub-domain of a domain that has a wildcard certificate from a certificate authority`  
 
 ### Testing without an Amazon Echo
 

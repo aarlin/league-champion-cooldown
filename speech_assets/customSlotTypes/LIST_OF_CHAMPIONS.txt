@@ -93,6 +93,8 @@ Riven
 Rumble
 Ryze
 Sejuani
+Senna
+Sett
 Shaco
 Shen
 Shyvana
