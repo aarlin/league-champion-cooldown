@@ -83,6 +83,7 @@ Orianna
 Ornn
 Pantheon
 Poppy
+Qiyana
 Quinn
 Rakan
 Rammus

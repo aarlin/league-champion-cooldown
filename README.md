@@ -61,14 +61,15 @@ what is Tryndamere R cooldown at 20%
 3. Ask Alexa to 'open champion cooldown'.  
 
 ## Updating for New Champions
-1. Update LIST_OF_CHAMPIONS.txt under speech_assets/customSlotTypes  
-2. Update pronunciation.csv to include the new champion name and Alexa  picked up name  
+1. Update `LIST_OF_CHAMPIONS.txt` under speech_assets/customSlotTypes  
+2. Update `pronunciation.csv` to include the new champion name and Alexa  picked up name. Make sure the two names are capitalized  
 ex. Nico,Neeko  
     Neeko,Neeko  
-
-3. Update LIST_OF_CHAMPIONS on Alexa Dashboard for the skill  
-4. Run `zappa update`  
-5. Test using `zappa tail --since 1m` after asking Alexa for the new champion  
+3. Update `alexa_champ_list.csv` for any nicknames you want to give the champion  
+4. Update `LIST_OF_CHAMPIONS` on Alexa Dashboard for the skill  
+5. Run `source league/bin/activate`    
+6. Run `zappa update`  
+7. Test using `zappa tail --since 1m` after asking Alexa for the new champion  
 
 *Note*: This is a csv file, don't include the space between comma. Also uppercase the two seperate names
 
